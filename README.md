@@ -142,20 +142,68 @@ npm run preview          # Preview production build locally
 
 ## 🌐 Deployment
 
-### Initial Setup (one-time)
-1. **Create Cloudflare Pages project** linked to this GitHub repo
-2. **Build settings:**
-   - Build command: `npm run build`
-   - Build output: `dist`
-   - Node version: `20`
-3. **Custom domain:** `pts-centre.kiev.ua` → add DNS record in Cloudflare
-4. **Create GitHub OAuth app** for Sveltia CMS admin login
-5. **Update DNS** to point to Cloudflare
+### Live URLs
+| Environment | URL |
+|-------------|-----|
+| Production | https://kyivptscentre.pages.dev |
+| CMS admin | https://kyivptscentre.pages.dev/admin |
+| Custom domain (pending NS transfer) | https://pts-centre.kiev.ua |
 
 ### Continuous Deployment
-- Push to `main` branch → Cloudflare Pages auto-builds and deploys
-- Preview deploys for pull requests
-- Rollback to any previous deploy in one click
+- Push to `main` branch → Cloudflare Pages auto-builds and deploys (~1 min)
+- Preview deploys created automatically for pull requests
+- Rollback to any previous deploy in one click in the Cloudflare dashboard
+
+### Environment Variables / Secrets
+Set via `npx wrangler pages secret put <NAME> --project-name kyivptscentre`:
+
+| Secret | Purpose |
+|--------|---------|
+| `RESEND_API_KEY` | Resend API key for contact form email delivery |
+| `CONTACT_EMAIL` | Recipient address for contact form submissions |
+
+### Cloudflare Workers
+| Worker | URL | Purpose |
+|--------|-----|---------|
+| `kyivptscentre-cms-auth` | `kyivptscentre-cms-auth.stanjackdaw.workers.dev` | GitHub OAuth handler for Sveltia CMS |
+
+Worker secrets set via `npx wrangler secret put <NAME> --name kyivptscentre-cms-auth`:
+
+| Secret | Purpose |
+|--------|---------|
+| `GITHUB_CLIENT_ID` | GitHub OAuth App client ID |
+| `GITHUB_CLIENT_SECRET` | GitHub OAuth App client secret |
+
+---
+
+## 📧 Contact Form — Resend Integration
+
+The contact form at `/contact/` is handled by `functions/api/contact.ts` (Cloudflare Pages Function).
+
+### How it works
+1. Visitor fills in name / email / message and submits
+2. The function validates the input and calls the **Resend API**
+3. An email is delivered to `office@pts-centre.kiev.ua`
+4. Visitor sees a success message inline (no page reload)
+
+### Resend account details
+- **Provider:** [resend.com](https://resend.com) — free tier: 3,000 emails/month, 100/day
+- **API key:** stored as `RESEND_API_KEY` Cloudflare Pages secret
+- **From address:** currently Resend's shared domain (`onboarding@resend.dev`)
+
+### Upgrade to a custom sending domain (recommended)
+To send from `noreply@pts-centre.kiev.ua` instead of Resend's shared domain:
+
+1. Log in at **resend.com** → **Domains** → **Add domain** → enter `pts-centre.kiev.ua`
+2. Resend will show 3 DNS records (TXT + MX) — add them in the Cloudflare DNS panel
+3. Once verified, update `functions/api/contact.ts` line `from:`:
+   ```ts
+   from: 'Київ-PTS-Центр <noreply@pts-centre.kiev.ua>',
+   ```
+4. Commit and push — Cloudflare rebuilds automatically
+
+### Fallback behaviour
+If `RESEND_API_KEY` is not set (e.g. local dev), the function logs the submission to the console instead of sending an email. The form still returns `{ ok: true }` so the UI works normally.
 
 ---
 
@@ -184,15 +232,45 @@ The legacy live site at `pts-centre.kiev.ua` has **injected spam/malware links**
 - [x] Set up i18n routing (UK default, EN secondary)
 - [x] Create base layout + components
 - [x] Port design from redesign branch
-- [x] Migrate content from legacy site (UA + EN, 17 pages)
+- [x] Migrate content from legacy site (UA + EN, 44 pages, zero build errors)
 - [x] Build contact form with Cloudflare Functions (Resend API)
 - [x] Install + configure Sveltia CMS admin (public/admin/)
-- [x] SEO: sitemap, robots.txt, OpenGraph meta
+- [x] SEO: sitemap, robots.txt, OpenGraph meta (og-cover.png 1200×630)
 - [x] Migrate images from legacy site (partner logos, product photos, map)
-- [x] Local build test (17 pages, zero errors)
-- [ ] Set up GitHub OAuth app for CMS
-- [ ] Configure Cloudflare Pages deployment
-- [ ] Create OG cover image (og-cover.png, 1200×630)
+- [x] Set up GitHub OAuth app for CMS (`kyivptscentre-cms-auth` Cloudflare Worker)
+- [x] Configure Cloudflare Pages deployment → https://kyivptscentre.pages.dev
+- [x] Create OG cover image (og-cover.png, 1200×630)
+
+---
+
+## 🔧 Remaining Steps
+
+### 1. Add dad as repo collaborator (for CMS editing)
+
+1. Go to **github.com/tech1982/kyivptscentre/settings/access**
+2. Click **Add people** → enter his GitHub username
+3. Set access level to **Write**
+
+Once added, he logs in at https://kyivptscentre.pages.dev/admin with his GitHub account.
+
+### 2. Custom domain `pts-centre.kiev.ua`
+
+When NS transfer to Cloudflare is possible:
+
+1. In Cloudflare dashboard → **Workers & Pages** → `kyivptscentre` → **Custom domains**
+2. Click **Set up a custom domain** → enter `pts-centre.kiev.ua`
+3. Cloudflare issues a free SSL certificate automatically (~1 min)
+4. Update `public/admin/config.yml` — change the `repo` comment URL if needed
+
+No code changes required — the site works on any domain out of the box.
+
+### 3. Resend domain verification (optional but recommended)
+
+By default Resend sends from its shared domain. To send from `pts-centre.kiev.ua`:
+
+1. Log in at **resend.com** → **Domains** → **Add domain**
+2. Add the DNS TXT records Resend provides (in Cloudflare DNS panel)
+3. Update `CONTACT_EMAIL` worker secret if the sending address changes
 
 ---
 
