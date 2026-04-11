@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import ItemGrid from '../../../components/ItemGrid.astro';
+const nav = [
+  { href: '/en/pneumo/',             label: 'Overview' },
+  { href: '/en/pneumo/areas/',       label: 'Applications' },
+  { href: '/en/pneumo/systems/',     label: 'System types' },
+  { href: '/en/pneumo/stations/',    label: 'Station types' },
+  { href: '/en/pneumo/equipment/',   label: 'Equipment' },
+  { href: '/en/pneumo/accessories/', label: 'Accessories' },
+  { href: '/en/pneumo/capsules/',    label: 'Capsules' },
+  { href: '/en/pneumo/software/',    label: 'Control software' },
+];
+const items = [
+  { t: 'Standard Capsule NW 110', d: 'For A4 documents, cash, keys. Diameter 110 mm. Maximum cargo weight up to 0.5 kg.' },
+  { t: 'Large Capsule NW 160', d: 'For larger items and heavier loads. Diameter 160 mm. Maximum weight up to 1 kg.' },
+  { t: 'Steel Capsule CARRIER STEEL NW75', d: 'Special stainless-steel capsule for hot or chemically active materials.' },
+];
+---
+<ProductLayout lang="en" title="Transport Capsules" description="Capsules for pneumatic tube systems: standard, large and specialised." sidebarLabel="Pneumatic Tube Mail" navItems={nav} breadcrumbs={[{ label: 'Pneumatic Tube Mail', href: '/en/pneumo/' }, { label: 'Capsules' }]} currentPath="/en/pneumo/capsules/">
+  <SectionTitle tag="Pneumatic Tube Mail" title="Transport Capsules" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Capsules are sealed containers in which cargo travels through the system. Size selection depends on the type of cargo.</p>
+  <img src="/images/Carrier_110_KLB.gif" alt="Pneumatic tube capsule NW 110" style="max-width:300px;border-radius:12px;margin:16px 0" loading="lazy" />
+  <ItemGrid items={items} />
+</ProductLayout>

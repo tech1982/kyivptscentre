@@ -1,0 +1,28 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+const nav = [
+  { href: '/en/pneumo/',             label: 'Overview' },
+  { href: '/en/pneumo/areas/',       label: 'Applications' },
+  { href: '/en/pneumo/systems/',     label: 'System types' },
+  { href: '/en/pneumo/stations/',    label: 'Station types' },
+  { href: '/en/pneumo/equipment/',   label: 'Equipment' },
+  { href: '/en/pneumo/accessories/', label: 'Accessories' },
+  { href: '/en/pneumo/capsules/',    label: 'Capsules' },
+  { href: '/en/pneumo/software/',    label: 'Control software' },
+];
+const items = [
+  'Combined shielded cable for inter-station communication',
+  'Capsule storage racks and organising units',
+  'Brackets and mounting kits for station installation',
+  'Specialised holders for medical test tubes and containers',
+  'Locking devices for secure fastening of capsule contents',
+  'Protective bags and inserts for fragile or sensitive cargo',
+];
+---
+<ProductLayout lang="en" title="Pneumatic Tube Accessories" description="Additional equipment and accessories for pneumatic tube systems." sidebarLabel="Pneumatic Tube Mail" navItems={nav} breadcrumbs={[{ label: 'Pneumatic Tube Mail', href: '/en/pneumo/' }, { label: 'Accessories' }]} currentPath="/en/pneumo/accessories/">
+  <SectionTitle tag="Pneumatic Tube Mail" title="Accessories" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Additional equipment to extend the functionality and usability of your system.</p>
+  <FeatureList items={items} />
+</ProductLayout>

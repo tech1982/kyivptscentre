@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import ItemGrid from '../../../components/ItemGrid.astro';
+const nav = [
+  { href: '/en/pneumo/',             label: 'Overview' },
+  { href: '/en/pneumo/areas/',       label: 'Applications' },
+  { href: '/en/pneumo/systems/',     label: 'System types' },
+  { href: '/en/pneumo/stations/',    label: 'Station types' },
+  { href: '/en/pneumo/equipment/',   label: 'Equipment' },
+  { href: '/en/pneumo/accessories/', label: 'Accessories' },
+  { href: '/en/pneumo/capsules/',    label: 'Capsules' },
+  { href: '/en/pneumo/software/',    label: 'Control software' },
+];
+const items = [
+  { t: 'Banks & Financial Institutions', d: 'Cash transfer between teller stations and vaults, document delivery for signatures, key transportation for safe-deposit boxes. Our client — Metro Cash & Carry.' },
+  { t: 'Retail Chains', d: 'Cashless cash collection from tills without manual handling, document exchange with accounting. Reduces risk and accelerates processes.' },
+  { t: 'Medical Facilities', d: 'Delivery of lab samples, prescriptions and medications between departments without risk of damage or contamination.' },
+  { t: 'Industrial Enterprises', d: 'Rapid exchange of technical documentation, product samples and spare parts between production floors and the office.' },
+];
+---
+<ProductLayout lang="en" title="Pneumatic Tube — Applications" description="Where pneumatic tube systems are used: banks, retail chains, hospitals, industrial plants." sidebarLabel="Pneumatic Tube Mail" navItems={nav} breadcrumbs={[{ label: 'Pneumatic Tube Mail', href: '/en/pneumo/' }, { label: 'Applications' }]} currentPath="/en/pneumo/areas/">
+  <SectionTitle tag="Pneumatic Tube Mail" title="Applications" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Pneumatic tube systems are used wherever fast, secure physical transfer between departments is required — without manual handling.</p>
+  <ItemGrid items={items} />
+</ProductLayout>

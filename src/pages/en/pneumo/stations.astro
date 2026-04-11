@@ -1,0 +1,27 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import ItemGrid from '../../../components/ItemGrid.astro';
+const nav = [
+  { href: '/en/pneumo/',             label: 'Overview' },
+  { href: '/en/pneumo/areas/',       label: 'Applications' },
+  { href: '/en/pneumo/systems/',     label: 'System types' },
+  { href: '/en/pneumo/stations/',    label: 'Station types' },
+  { href: '/en/pneumo/equipment/',   label: 'Equipment' },
+  { href: '/en/pneumo/accessories/', label: 'Accessories' },
+  { href: '/en/pneumo/capsules/',    label: 'Capsules' },
+  { href: '/en/pneumo/software/',    label: 'Control software' },
+];
+const items = [
+  { t: 'Compact Station DIANA (ÖR 20.000)', d: 'Desktop model for office environments. Automatic send and receive, LCD display. Minimal footprint.' },
+  { t: 'Standard Multi-Address Station', d: 'For high-traffic areas. Supports a queue of outgoing shipments and password protection. The reliable core of most installations.' },
+  { t: 'Password-Protected Station', d: 'For valuables: cash, keys. Capsule retrieval is only possible after entering the correct password.' },
+  { t: 'Automatic Sorting Station', d: 'For large distribution hubs. Automatically routes capsules along predefined paths without operator input.' },
+];
+---
+<ProductLayout lang="en" title="Pneumatic Tube Station Types" description="Overview of Sumetzberger pneumatic tube station types." sidebarLabel="Pneumatic Tube Mail" navItems={nav} breadcrumbs={[{ label: 'Pneumatic Tube Mail', href: '/en/pneumo/' }, { label: 'Station types' }]} currentPath="/en/pneumo/stations/">
+  <SectionTitle tag="Pneumatic Tube Mail" title="Station Types" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Stations are the send and receive points for capsules. The right type depends on location and required security level.</p>
+  <img src="/images/BankPlace.jpg" alt="Pneumatic tube station in a bank" style="width:100%;max-height:280px;object-fit:cover;border-radius:12px;margin:16px 0" loading="lazy" />
+  <ItemGrid items={items} />
+</ProductLayout>

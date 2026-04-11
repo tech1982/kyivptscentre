@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import ItemGrid from '../../../components/ItemGrid.astro';
+const nav = [
+  { href: '/en/queue/',              label: 'Overview' },
+  { href: '/en/queue/areas/',        label: 'Applications' },
+  { href: '/en/queue/systems/',      label: 'System types' },
+  { href: '/en/queue/registration/', label: 'Client registration' },
+  { href: '/en/queue/displays/',     label: 'Information displays' },
+  { href: '/en/queue/call/',         label: 'Call buttons' },
+  { href: '/en/queue/accessories/',  label: 'Accessories' },
+  { href: '/en/queue/software/',     label: 'Control software' },
+];
+const items = [
+  { t: 'Basic System (up to 5 counters)', d: 'Simple ticket dispenser terminal, a few LED displays, call buttons at each counter. Ideal for small offices.' },
+  { t: 'Standard System (5–20 counters)', d: 'Touch-screen kiosk, main information display, individual counter screens, software analytics.' },
+  { t: 'Advanced System (20+ counters)', d: 'Multi-zone architecture, centralised management of multiple service points, CRM/ERP integration.' },
+];
+---
+<ProductLayout lang="en" title="Queue Management System Types" description="QMS configurations by scale: basic, standard and advanced." sidebarLabel="Queue Management" navItems={nav} breadcrumbs={[{ label: 'Queue Management', href: '/en/queue/' }, { label: 'System types' }]} currentPath="/en/queue/systems/">
+  <SectionTitle tag="Queue Management" title="System Types" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Different configurations to match your facility's scale and number of service counters.</p>
+  <img src="/images/QNetBasicSystem1.gif" alt="Basic queue management system" style="width:100%;border-radius:12px;margin:16px 0" loading="lazy" />
+  <ItemGrid items={items} />
+</ProductLayout>

@@ -1,0 +1,30 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+const nav = [
+  { href: '/en/pneumo/',             label: 'Overview' },
+  { href: '/en/pneumo/areas/',       label: 'Applications' },
+  { href: '/en/pneumo/systems/',     label: 'System types' },
+  { href: '/en/pneumo/stations/',    label: 'Station types' },
+  { href: '/en/pneumo/equipment/',   label: 'Equipment' },
+  { href: '/en/pneumo/accessories/', label: 'Accessories' },
+  { href: '/en/pneumo/capsules/',    label: 'Capsules' },
+  { href: '/en/pneumo/software/',    label: 'Control software' },
+];
+const items = [
+  'Routing and shipment priority configuration',
+  'Real-time status monitoring of all stations',
+  'Complete shipment log with timestamps and status records',
+  'Fault diagnostics and automatic error notifications',
+  'System load statistics and analytics',
+  'Remote access via the internet and local network',
+  'Integration with corporate systems (ERP, CRM)',
+];
+---
+<ProductLayout lang="en" title="Pneumatic Tube Control Software" description="Specialised software for managing pneumatic tube systems." sidebarLabel="Pneumatic Tube Mail" navItems={nav} breadcrumbs={[{ label: 'Pneumatic Tube Mail', href: '/en/pneumo/' }, { label: 'Control software' }]} currentPath="/en/pneumo/software/">
+  <SectionTitle tag="Pneumatic Tube Mail" title="Control Software" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Specialised software gives you full control over the system and detailed analytics for management.</p>
+  <FeatureList items={items} />
+  <div style="margin-top:24px"><a href="/en/support/" class="btn btn--ghost btn--sm">Technical support →</a></div>
+</ProductLayout>
