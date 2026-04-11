@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ItemGrid from '../../components/ItemGrid.astro';
+const nav = [
+  { href: '/pneumo/',             label: 'Огляд' },
+  { href: '/pneumo/areas/',       label: 'Сфери застосування' },
+  { href: '/pneumo/systems/',     label: 'Типи систем' },
+  { href: '/pneumo/stations/',    label: 'Типи станцій' },
+  { href: '/pneumo/equipment/',   label: 'Обладнання' },
+  { href: '/pneumo/accessories/', label: 'Аксесуари' },
+  { href: '/pneumo/capsules/',    label: 'Капсули' },
+  { href: '/pneumo/software/',    label: 'ПЗ керування' },
+];
+const items = [
+  { t: 'Стандартна капсула NW 110', d: 'Для документів формату A4, грошей, ключів. Діаметр 110 мм. Максимальна вага вантажу — до 0,5 кг.' },
+  { t: 'Збільшена капсула NW 160', d: 'Для більших предметів та важчих вантажів. Діаметр 160 мм. Максимальна вага — до 1 кг.' },
+  { t: 'Металева капсула CARRIER STEEL NW75', d: 'Спеціальна капсула з нержавіючої сталі для гарячих або хімічно активних матеріалів.' },
+];
+---
+<ProductLayout lang="uk" title="Транспортувальні капсули" description="Капсули для систем пневматичної пошти: стандартні, збільшені та спеціальні." sidebarLabel="Пневматична пошта" navItems={nav} breadcrumbs={[{ label: 'Пневматична пошта', href: '/pneumo/' }, { label: 'Капсули' }]} currentPath="/pneumo/capsules/">
+  <SectionTitle tag="Пневматична пошта" title="Транспортувальні капсули" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Капсули — герметичні контейнери, в яких переміщуються вантажі. Вибір розміру залежить від типу вантажу.</p>
+  <img src="/images/Carrier_110_KLB.gif" alt="Капсула для пневмопошти NW 110" style="max-width:300px;border-radius:12px;margin:16px 0" loading="lazy" />
+  <ItemGrid items={items} />
+</ProductLayout>

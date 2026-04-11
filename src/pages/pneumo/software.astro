@@ -1,0 +1,30 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import FeatureList from '../../components/FeatureList.astro';
+const nav = [
+  { href: '/pneumo/',             label: 'Огляд' },
+  { href: '/pneumo/areas/',       label: 'Сфери застосування' },
+  { href: '/pneumo/systems/',     label: 'Типи систем' },
+  { href: '/pneumo/stations/',    label: 'Типи станцій' },
+  { href: '/pneumo/equipment/',   label: 'Обладнання' },
+  { href: '/pneumo/accessories/', label: 'Аксесуари' },
+  { href: '/pneumo/capsules/',    label: 'Капсули' },
+  { href: '/pneumo/software/',    label: 'ПЗ керування' },
+];
+const items = [
+  'Налаштування маршрутизації та пріоритетів відправлень',
+  'Моніторинг стану всіх станцій у реальному часі',
+  'Повний журнал відправлень із фіксацією часу та статусів',
+  'Діагностика несправностей та автоматичні сповіщення про помилки',
+  'Статистика й аналітика завантаження системи',
+  'Віддалений доступ через Інтернет та локальну мережу',
+  'Інтеграція з корпоративними системами (ERP, CRM)',
+];
+---
+<ProductLayout lang="uk" title="ПЗ керування пневмопоштою" description="Спеціалізоване програмне забезпечення для керування системами пневматичної пошти." sidebarLabel="Пневматична пошта" navItems={nav} breadcrumbs={[{ label: 'Пневматична пошта', href: '/pneumo/' }, { label: 'ПЗ керування' }]} currentPath="/pneumo/software/">
+  <SectionTitle tag="Пневматична пошта" title="Програмне забезпечення" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Спеціалізоване ПЗ забезпечує повний контроль над системою та детальну аналітику для керівництва.</p>
+  <FeatureList items={items} />
+  <div style="margin-top:24px"><a href="/support/" class="btn btn--ghost btn--sm">Технічна підтримка →</a></div>
+</ProductLayout>

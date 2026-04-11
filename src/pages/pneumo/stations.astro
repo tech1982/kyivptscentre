@@ -1,0 +1,27 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ItemGrid from '../../components/ItemGrid.astro';
+const nav = [
+  { href: '/pneumo/',             label: 'Огляд' },
+  { href: '/pneumo/areas/',       label: 'Сфери застосування' },
+  { href: '/pneumo/systems/',     label: 'Типи систем' },
+  { href: '/pneumo/stations/',    label: 'Типи станцій' },
+  { href: '/pneumo/equipment/',   label: 'Обладнання' },
+  { href: '/pneumo/accessories/', label: 'Аксесуари' },
+  { href: '/pneumo/capsules/',    label: 'Капсули' },
+  { href: '/pneumo/software/',    label: 'ПЗ керування' },
+];
+const items = [
+  { t: 'Компактна станція DIANA (ÖR 20.000)', d: 'Настільна модель для офісних приміщень. Автоматичний прийом і відправка, LCD-дисплей. Займає мінімум місця.' },
+  { t: 'Стандартна багатоадресна станція', d: 'Для зон із високою прохідністю. Підтримує чергу відправлень і парольний захист. Надійна основа більшості інсталяцій.' },
+  { t: 'Станція з парольним доступом', d: 'Для роботи з цінностями: гроші, ключі. Вилучення капсули можливе лише після введення правильного пароля.' },
+  { t: 'Станція автоматичного сортування', d: 'Для великих розподільчих вузлів. Автоматично спрямовує капсули за маршрутами без участі оператора.' },
+];
+---
+<ProductLayout lang="uk" title="Типи станцій пневмопошти" description="Огляд типів станцій систем пневматичної пошти Sumetzberger." sidebarLabel="Пневматична пошта" navItems={nav} breadcrumbs={[{ label: 'Пневматична пошта', href: '/pneumo/' }, { label: 'Типи станцій' }]} currentPath="/pneumo/stations/">
+  <SectionTitle tag="Пневматична пошта" title="Типи станцій" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Станції — це точки відправлення та отримання капсул. Вибір типу залежить від місця встановлення та рівня безпеки.</p>
+  <img src="/images/BankPlace.jpg" alt="Станція пневмопошти в банку" style="width:100%;max-height:280px;object-fit:cover;border-radius:12px;margin:16px 0" loading="lazy" />
+  <ItemGrid items={items} />
+</ProductLayout>

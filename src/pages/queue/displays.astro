@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ItemGrid from '../../components/ItemGrid.astro';
+const nav = [
+  { href: '/queue/',              label: 'Огляд' },
+  { href: '/queue/areas/',        label: 'Сфери застосування' },
+  { href: '/queue/systems/',      label: 'Типи систем' },
+  { href: '/queue/registration/', label: 'Реєстрація клієнтів' },
+  { href: '/queue/displays/',     label: 'Інформаційні табло' },
+  { href: '/queue/call/',         label: 'Кнопковий виклик' },
+  { href: '/queue/accessories/',  label: 'Аксесуари' },
+  { href: '/queue/software/',     label: 'ПЗ керування' },
+];
+const items = [
+  { t: 'Головне зведене табло', d: 'Відображає кілька поточних викликів одночасно. Встановлюється в зоні очікування на видному місці.' },
+  { t: 'Дисплей біля вікна', d: 'Компактний екран, що показує номер поточного талона, який обслуговується на цьому вікні.' },
+  { t: 'LED-біжучий рядок', d: 'Додатковий засіб оповіщення клієнтів і показу рекламних або інформаційних повідомлень.' },
+];
+---
+<ProductLayout lang="uk" title="Інформаційні табло QMS" description="Дисплеї та табло для систем електронного керування чергою." sidebarLabel="Керування чергою" navItems={nav} breadcrumbs={[{ label: 'Керування чергою', href: '/queue/' }, { label: 'Інформаційні табло' }]} currentPath="/queue/displays/">
+  <SectionTitle tag="Керування чергою" title="Інформаційні табло" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Візуальне та звукове інформування клієнтів — ключова частина зручного сервісу.</p>
+  <img src="/images/DC55_WaitingAreaDisplay.gif" alt="Інформаційне табло в зоні очікування" style="max-width:300px;border-radius:12px;margin:16px 0" loading="lazy" />
+  <ItemGrid items={items} />
+</ProductLayout>

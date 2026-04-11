@@ -1,0 +1,28 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import FeatureList from '../../components/FeatureList.astro';
+const nav = [
+  { href: '/queue/',              label: 'Огляд' },
+  { href: '/queue/areas/',        label: 'Сфери застосування' },
+  { href: '/queue/systems/',      label: 'Типи систем' },
+  { href: '/queue/registration/', label: 'Реєстрація клієнтів' },
+  { href: '/queue/displays/',     label: 'Інформаційні табло' },
+  { href: '/queue/call/',         label: 'Кнопковий виклик' },
+  { href: '/queue/accessories/',  label: 'Аксесуари' },
+  { href: '/queue/software/',     label: 'ПЗ керування' },
+];
+const items = [
+  'Налаштування категорій послуг і пріоритетів обслуговування',
+  'Моніторинг завантаженості вікон у реальному часі',
+  'Детальні статистичні звіти для керівництва',
+  'Інтеграція з CRM/ERP через API',
+  'Віддалене керування кількома філіями з єдиного центру',
+  'Багатомовний інтерфейс',
+];
+---
+<ProductLayout lang="uk" title="ПЗ керування чергою" description="Програмне забезпечення для систем електронного керування чергою: аналітика, звіти, інтеграції." sidebarLabel="Керування чергою" navItems={nav} breadcrumbs={[{ label: 'Керування чергою', href: '/queue/' }, { label: 'ПЗ керування' }]} currentPath="/queue/software/">
+  <SectionTitle tag="Керування чергою" title="Програмне забезпечення" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Повний цикл управління та аналітики — від налаштувань до детальних звітів для керівника.</p>
+  <FeatureList items={items} />
+</ProductLayout>

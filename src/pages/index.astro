@@ -2,6 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import FeatureList from '../components/FeatureList.astro';
+import { Image } from 'astro:assets';
+import sumetzberger from '../../public/images/Sumetzberger.jpg';
+import roburSafe    from '../../public/images/Robur.jpg';
+import qnet        from '../../public/images/QNet_logo.jpg';
+import aquis       from '../../public/images/Aquis_logo.jpg';
 
 const lang = 'uk';
 
@@ -37,10 +42,10 @@ const solutions = [
 ];
 
 const partners = [
-  { name: 'Sumetzberger', country: 'Австрія', desc: 'Провідний виробник систем пневматичної пошти в Європі.', url: 'https://www.sumetzberger.at', logo: '/images/Sumetzberger.jpg' },
-  { name: 'Robur Safe',   country: 'Швеція',  desc: 'Сейфові двері та депозитарне обладнання класу Grade V.', url: 'https://www.robursafe.com', logo: '/images/Robur.jpg' },
-  { name: 'Q-Net Systems',country: 'Угорщина',desc: 'Системи електронного керування чергою для бізнесу будь-якого масштабу.', url: 'https://www.q-net.com', logo: '/images/QNet_logo.jpg' },
-  { name: 'Aquis IT',     country: 'Угорщина',desc: 'Інформаційні кіоски та рішення для обслуговування клієнтів.', url: 'https://www.kioskhungary.eu', logo: '/images/Aquis_logo.jpg' },
+  { name: 'Sumetzberger', country: 'Австрія', desc: 'Провідний виробник систем пневматичної пошти в Європі.', url: 'https://www.sumetzberger.at', logo: sumetzberger },
+  { name: 'Robur Safe',   country: 'Швеція',  desc: 'Сейфові двері та депозитарне обладнання класу Grade V.', url: 'https://www.robursafe.com', logo: roburSafe },
+  { name: 'Q-Net Systems',country: 'Угорщина',desc: 'Системи електронного керування чергою для бізнесу будь-якого масштабу.', url: 'https://www.q-net.com', logo: qnet },
+  { name: 'Aquis IT',     country: 'Угорщина',desc: 'Інформаційні кіоски та рішення для обслуговування клієнтів.', url: 'https://www.kioskhungary.eu', logo: aquis },
 ];
 
 const howItWorks = [
@@ -142,7 +147,7 @@ const howItWorks = [
       <div class="partners-grid">
         {partners.map(({ name, country, desc, url, logo }) => (
           <div class="partner-card">
-            <img src={logo} alt={name} class="partner-card__logo" loading="lazy" />
+            <Image src={logo} alt={name} class="partner-card__logo" height={40} loading="lazy" />
             <div class="partner-card__name">{name}</div>
             <div class="partner-card__country">{country}</div>
             <p class="partner-card__desc">{desc}</p>
