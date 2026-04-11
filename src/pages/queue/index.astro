@@ -4,7 +4,9 @@ import SectionTitle from '../../components/SectionTitle.astro';
 import FeatureList from '../../components/FeatureList.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 
+import queueData from '../../content/pages/queue.uk.json';
 const lang = 'uk';
+const { steps, results } = queueData;
 
 const subpages = [
   { href: '/queue/',              label: 'Огляд' },
@@ -17,20 +19,6 @@ const subpages = [
   { href: '/queue/software/',     label: 'ПЗ керування' },
 ];
 
-const steps = [
-  { s: '1', title: 'Реєстрація', desc: 'Клієнт підходить до терміналу, обирає послугу та отримує талон з номером черги та очікуваним часом.' },
-  { s: '2', title: 'Очікування', desc: 'Клієнт чекає в зоні відпочинку. На табло відображаються поточні номери в режимі реального часу.' },
-  { s: '3', title: 'Виклик',     desc: 'Оператор натискає кнопку. На головному табло та дисплеї біля вікна з\'являється номер і вікно обслуговування.' },
-  { s: '4', title: 'Обслуговування', desc: 'Клієнт підходить до вікна. Система автоматично фіксує час обслуговування та статистику.' },
-];
-
-const results = [
-  'Скорочення суб\'єктивного часу очікування та невдоволення клієнтів',
-  'Рівномірний розподіл навантаження між операторами',
-  'Детальна статистика обслуговування для керівника',
-  'Підвищення задоволеності клієнтів та NPS',
-  'Можливість пріоритизації VIP-клієнтів',
-];
 ---
 
 <BaseLayout lang={lang} title="Системи електронного керування чергою" description="Постачання та монтаж систем електронного керування чергою в Україні. Партнери: Q-Net, Aquis IT.">
@@ -58,9 +46,9 @@ const results = [
 
         <h3 class="subsection-title">Як це працює</h3>
         <div class="steps">
-          {steps.map(({ s, title, desc }) => (
+          {steps.map(({ step, title, desc }) => (
             <div class="steps__item">
-              <div class="steps__num">{s}</div>
+              <div class="steps__num">{step}</div>
               <div>
                 <div class="steps__title">{title}</div>
                 <div class="steps__desc">{desc}</div>

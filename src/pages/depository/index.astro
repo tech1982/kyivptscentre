@@ -4,15 +4,9 @@ import SectionTitle from '../../components/SectionTitle.astro';
 import FeatureList from '../../components/FeatureList.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 
+import pageData from '../../content/pages/depository.uk.json';
 const lang = 'uk';
-
-const offerings = [
-  'Сейфові двері класу Grade V — найвищий рівень захисту',
-  'Сховища «під ключ» — проєктування, виготовлення, монтаж',
-  'Депозитні скриньки різних розмірів для банків і приватних осіб',
-  'Системи контролю доступу — біометрія, електронні замки, відеоспостереження',
-  'Професійний монтаж та постгарантійне обслуговування',
-];
+const { description, offerings } = pageData;
 ---
 
 <BaseLayout lang={lang} title="Депозитарне обладнання — Robur Safe" description="Постачання та встановлення депозитарного обладнання Robur Safe (Швеція): сейфові двері, сховища, депозитні скриньки.">
@@ -33,12 +27,7 @@ const offerings = [
           title="Професійне обладнання для зберігання цінностей"
           subtitle="Сейфові двері, сховища та депозитні скриньки від Robur Safe (Швеція)."
         />
-        <p class="prose-p">
-          Компанія «Київ-PTS-Центр» постачає та встановлює депозитарне обладнання
-          найвищого класу захисту від шведського виробника Robur Safe.
-          Ми пропонуємо повний цикл: від консультації та проєктування до монтажу
-          та технічного обслуговування.
-        </p>
+        <p class="prose-p">{description}</p>
         <h3 class="subsection-title">Що ми пропонуємо</h3>
         <FeatureList items={offerings} />
         <div style="margin-top:32px;">

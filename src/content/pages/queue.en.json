@@ -1,0 +1,32 @@
+{
+  "description": "Electronic queue management systems organise client flow without crowding or conflict. The client registers at the kiosk, receives a ticket and waits for their call. Operators serve people in strict order — everything under control.",
+  "steps": [
+    {
+      "step": "1",
+      "title": "Registration",
+      "desc": "The client approaches the kiosk, selects a service and receives a ticket with a queue number and estimated waiting time."
+    },
+    {
+      "step": "2",
+      "title": "Waiting",
+      "desc": "The client waits in the seating area. Current numbers are shown on the display board in real time."
+    },
+    {
+      "step": "3",
+      "title": "Call",
+      "desc": "The operator presses the call button. The client's number and counter appear on the main board and the counter display."
+    },
+    {
+      "step": "4",
+      "title": "Service",
+      "desc": "The client approaches the counter. The system automatically records service time and statistics."
+    }
+  ],
+  "results": [
+    "Reduced perceived waiting time and client frustration",
+    "Even workload distribution across operators",
+    "Detailed service statistics for management",
+    "Improved client satisfaction and NPS",
+    "Ability to prioritise VIP clients"
+  ]
+}

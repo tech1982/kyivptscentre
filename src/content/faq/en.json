@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "question": "What is the maximum range of a pneumatic tube system?",
+      "answer": "The SU-6 model supports distances up to 380 m. For longer routes (up to 600 m), intermediate blowers are used."
+    },
+    {
+      "question": "Can an existing system be expanded?",
+      "answer": "Yes. We recalculate the system capacity and add new stations and pipework. Our engineers will help with planning."
+    },
+    {
+      "question": "What pressure is used in the system?",
+      "answer": "Between 0.5 and 1 bar — sufficient to move capsules weighing up to 1 kg at speeds up to 8 m/s."
+    },
+    {
+      "question": "What happens if a capsule gets stuck?",
+      "answer": "The system automatically reverses the airflow to free the capsule. Inspection hatches are also installed at critical points for manual access."
+    },
+    {
+      "question": "What does a minimum system cost?",
+      "answer": "A basic point-to-point system (two stations) starts from €2,800. The final price depends on the number of stations, pipe length and site specifics."
+    },
+    {
+      "question": "Can the tube run between separate buildings?",
+      "answer": "Yes — through underground ducts, cable channels or overhead bridges. We have experience with such projects."
+    },
+    {
+      "question": "How noisy is the system?",
+      "answer": "The blower is installed in a technical room. Noise at workstations does not exceed 45 dB — roughly equivalent to a quiet office."
+    },
+    {
+      "question": "Can equipment from different manufacturers be combined?",
+      "answer": "Technically yes, if they are compatible. However, for reliable warranties and servicing we recommend keeping to a single manufacturer."
+    }
+  ]
+}

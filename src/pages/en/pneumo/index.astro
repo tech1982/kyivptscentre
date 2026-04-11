@@ -3,8 +3,10 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SectionTitle from '../../../components/SectionTitle.astro';
 import FeatureList from '../../../components/FeatureList.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import pneumoData from '../../../content/pages/pneumo.en.json';
 
 const lang = 'en';
+const { description, where, advantages } = pneumoData;
 
 const subpages = [
   { href: '/en/pneumo/',             label: 'Overview' },
@@ -15,17 +17,6 @@ const subpages = [
   { href: '/en/pneumo/accessories/', label: 'Accessories' },
   { href: '/en/pneumo/capsules/',    label: 'Capsules' },
   { href: '/en/pneumo/software/',    label: 'Control software' },
-];
-
-const advantages = [
-  'Instant delivery of documents, cash and small items up to 1 kg',
-  'Speed up to 8 m/s — faster than any courier',
-  'Fully automated routing — zero manual intervention',
-  'Real-time shipment tracking on LCD displays',
-  'Software control with integration into corporate systems',
-  'Minimal maintenance — designed for years of reliable operation',
-  'High security — password-protected stations and data encryption',
-  'Suitable for new builds and renovation of existing premises',
 ];
 ---
 
@@ -46,8 +37,8 @@ const advantages = [
         <Breadcrumb homeLabel="Home" homeHref="/en/" items={[{ label: 'Pneumatic Tube Mail' }]} />
         <SectionTitle tag="Pneumatic Tube Mail" title="Pneumatic Tube Transport Systems" subtitle="Reliable, fast delivery of documents and small items within buildings — by Sumetzberger (Austria)." />
         <div class="prose">
-          <p>A pneumatic tube system is an engineering solution for the automatic delivery of documents, cash, lab samples, keys and other items weighing up to 1 kg. Capsules travel through pipelines at up to 8 m/s over distances of up to 600 metres.</p>
-          <p><strong>Applications:</strong> banks and financial institutions, supermarkets and retail chains, hospitals and laboratories, industrial enterprises, multi-floor office buildings.</p>
+          <p>{description}</p>
+          <p><strong>Applications:</strong> {where}</p>
         </div>
         <h3 class="subsection-title">Key benefits</h3>
         <FeatureList items={advantages} />

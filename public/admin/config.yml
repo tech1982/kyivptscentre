@@ -36,6 +36,106 @@ collections:
           - { label: "Адреса", name: address, widget: string }
           - { label: "Робочі години", name: workingHours, widget: string }
 
+  # ── FAQ ────────────────────────────────────────────────────
+  - name: faq
+    label: "❓ FAQ"
+    files:
+      - name: faq_uk
+        label: "FAQ (Українська)"
+        file: src/content/faq/uk.json
+        fields:
+          - name: items
+            label: Питання та відповіді
+            widget: list
+            fields:
+              - { label: "Питання", name: question, widget: string }
+              - { label: "Відповідь", name: answer, widget: text }
+      - name: faq_en
+        label: "FAQ (English)"
+        file: src/content/faq/en.json
+        fields:
+          - name: items
+            label: Questions & Answers
+            widget: list
+            fields:
+              - { label: "Question", name: question, widget: string }
+              - { label: "Answer", name: answer, widget: text }
+
+  # ── PRODUCT PAGES ──────────────────────────────────────────
+  - name: pages
+    label: "📄 Сторінки продуктів"
+    files:
+      - name: pneumo_uk
+        label: "Пневмопошта (Українська)"
+        file: src/content/pages/pneumo.uk.json
+        fields:
+          - { label: "Опис", name: description, widget: text }
+          - { label: "Де застосовується", name: where, widget: text }
+          - name: advantages
+            label: Переваги
+            widget: list
+            field: { label: Пункт, name: item, widget: string }
+      - name: pneumo_en
+        label: "Pneumo (English)"
+        file: src/content/pages/pneumo.en.json
+        fields:
+          - { label: "Description", name: description, widget: text }
+          - { label: "Applications", name: where, widget: text }
+          - name: advantages
+            label: Key benefits
+            widget: list
+            field: { label: Item, name: item, widget: string }
+      - name: queue_uk
+        label: "Керування чергою (Українська)"
+        file: src/content/pages/queue.uk.json
+        fields:
+          - { label: "Опис", name: description, widget: text }
+          - name: steps
+            label: Кроки роботи
+            widget: list
+            fields:
+              - { label: "№", name: step, widget: string }
+              - { label: "Заголовок", name: title, widget: string }
+              - { label: "Опис", name: desc, widget: text }
+          - name: results
+            label: Результати впровадження
+            widget: list
+            field: { label: Пункт, name: item, widget: string }
+      - name: queue_en
+        label: "Queue Management (English)"
+        file: src/content/pages/queue.en.json
+        fields:
+          - { label: "Description", name: description, widget: text }
+          - name: steps
+            label: How it works
+            widget: list
+            fields:
+              - { label: "Step #", name: step, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Description", name: desc, widget: text }
+          - name: results
+            label: Results after implementation
+            widget: list
+            field: { label: Item, name: item, widget: string }
+      - name: depository_uk
+        label: "Депозитарій (Українська)"
+        file: src/content/pages/depository.uk.json
+        fields:
+          - { label: "Опис", name: description, widget: text }
+          - name: offerings
+            label: Що ми пропонуємо
+            widget: list
+            field: { label: Пункт, name: item, widget: string }
+      - name: depository_en
+        label: "Depository (English)"
+        file: src/content/pages/depository.en.json
+        fields:
+          - { label: "Description", name: description, widget: text }
+          - name: offerings
+            label: What we offer
+            widget: list
+            field: { label: Item, name: item, widget: string }
+
   # ── NEWS ───────────────────────────────────────────────────
   - name: news
     label: "📰 Новини"

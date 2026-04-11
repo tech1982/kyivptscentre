@@ -4,29 +4,20 @@ import SectionTitle from '../../components/SectionTitle.astro';
 import FeatureList from '../../components/FeatureList.astro';
 import ItemGrid from '../../components/ItemGrid.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import pneumoData from '../../content/pages/pneumo.uk.json';
 
 const lang = 'uk';
+const { description, where, advantages } = pneumoData;
 
 const subpages = [
-  { href: '/pneumo/',                   label: 'Огляд' },
-  { href: '/pneumo/areas/',             label: 'Сфери застосування' },
-  { href: '/pneumo/systems/',           label: 'Типи систем' },
-  { href: '/pneumo/stations/',          label: 'Типи станцій' },
-  { href: '/pneumo/equipment/',         label: 'Обладнання' },
-  { href: '/pneumo/accessories/',       label: 'Аксесуари' },
-  { href: '/pneumo/capsules/',          label: 'Капсули' },
-  { href: '/pneumo/software/',          label: 'ПЗ керування' },
-];
-
-const advantages = [
-  'Миттєва доставка документів, грошей та дрібних вантажів до 1 кг',
-  'Швидкість до 8 м/с — швидше за будь-якого кур\'єра',
-  'Повністю автоматизована маршрутизація — без участі людини',
-  'Моніторинг кожного відправлення на LCD-дисплеях у реальному часі',
-  'Програмне керування з інтеграцією в корпоративні системи',
-  'Мінімальне обслуговування — системи розраховані на роки стабільної роботи',
-  'Висока безпека — парольний захист станцій та шифрування даних',
-  'Підходить як для нових об\'єктів, так і для реконструкції існуючих',
+  { href: '/pneumo/',             label: 'Огляд' },
+  { href: '/pneumo/areas/',       label: 'Сфери застосування' },
+  { href: '/pneumo/systems/',     label: 'Типи систем' },
+  { href: '/pneumo/stations/',    label: 'Типи станцій' },
+  { href: '/pneumo/equipment/',   label: 'Обладнання' },
+  { href: '/pneumo/accessories/', label: 'Аксесуари' },
+  { href: '/pneumo/capsules/',    label: 'Капсули' },
+  { href: '/pneumo/software/',    label: 'ПЗ керування' },
 ];
 ---
 
@@ -64,16 +55,8 @@ const advantages = [
         />
 
         <div class="prose">
-          <p>
-            Система пневматичної пошти — це інженерне рішення для автоматичної доставки
-            документів, грошей, аналізів, ключів та інших предметів вагою до 1 кг.
-            Капсули рухаються трубопроводами зі швидкістю до 8 м/с на відстань до 600 метрів.
-          </p>
-          <p>
-            <strong>Де застосовується:</strong> банки та фінансові установи, супермаркети й
-            торговельні мережі, лікарні та лабораторії, промислові підприємства, офіси
-            з розгалуженою структурою.
-          </p>
+          <p>{description}</p>
+          <p><strong>Де застосовується:</strong> {where}</p>
         </div>
 
         <div class="pneumo-photos">

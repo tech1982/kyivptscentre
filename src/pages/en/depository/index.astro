@@ -4,15 +4,9 @@ import SectionTitle from '../../../components/SectionTitle.astro';
 import FeatureList from '../../../components/FeatureList.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 
+import pageData from '../../../content/pages/depository.en.json';
 const lang = 'en';
-
-const offerings = [
-  'Grade V vault doors — the highest level of certified protection',
-  'Turnkey strongrooms — design, manufacture and installation',
-  'Safe deposit boxes in a range of sizes for banks and private clients',
-  'Access control systems — biometrics, electronic locks, CCTV',
-  'Professional installation and post-warranty maintenance',
-];
+const { description, offerings } = pageData;
 ---
 
 <BaseLayout lang={lang} title="Depository Equipment — Robur Safe" description="Supply and installation of Robur Safe (Sweden) depository equipment: vault doors, strongrooms, safe deposit boxes.">
@@ -33,11 +27,7 @@ const offerings = [
           title="Professional Secure Storage Equipment"
           subtitle="Vault doors, strongrooms and safe deposit boxes by Robur Safe (Sweden)."
         />
-        <p class="prose-p">
-          Kyiv-PTS-Centre supplies and installs top-grade depository equipment from
-          Swedish manufacturer Robur Safe. We handle the full cycle: consultation,
-          design, installation and ongoing technical support.
-        </p>
+        <p class="prose-p">{description}</p>
         <h3 class="subsection-title">What we offer</h3>
         <FeatureList items={offerings} />
         <div style="margin-top:32px;">

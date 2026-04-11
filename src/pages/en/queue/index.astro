@@ -4,7 +4,9 @@ import SectionTitle from '../../../components/SectionTitle.astro';
 import FeatureList from '../../../components/FeatureList.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 
+import queueData from '../../../content/pages/queue.en.json';
 const lang = 'en';
+const { steps, results } = queueData;
 
 const subpages = [
   { href: '/en/queue/',              label: 'Overview' },
@@ -17,20 +19,6 @@ const subpages = [
   { href: '/en/queue/software/',     label: 'Control software' },
 ];
 
-const steps = [
-  { s: '1', title: 'Registration', desc: 'The client approaches the kiosk, selects a service and receives a ticket showing their queue number and estimated wait time.' },
-  { s: '2', title: 'Waiting',      desc: 'The client waits in the seating area. The main display shows current numbers being served in real time.' },
-  { s: '3', title: 'Call',         desc: 'The operator presses a button. The display shows the ticket number and counter to proceed to.' },
-  { s: '4', title: 'Service',      desc: 'The client goes to the assigned counter. Service time and statistics are recorded automatically.' },
-];
-
-const results = [
-  'Reduced perceived waiting time and client frustration',
-  'Even distribution of workload across operators',
-  'Detailed service statistics for management reporting',
-  'Higher client satisfaction and NPS scores',
-  'Priority routing for VIP clients',
-];
 ---
 
 <BaseLayout lang={lang} title="Electronic Queue Management Systems" description="Supply and installation of queue management systems in Ukraine. Partners: Q-Net, Aquis IT.">
@@ -56,9 +44,9 @@ const results = [
         </p>
         <h3 class="subsection-title">How it works</h3>
         <div class="steps">
-          {steps.map(({ s, title, desc }) => (
+          {steps.map(({ step, title, desc }) => (
             <div class="steps__item">
-              <div class="steps__num">{s}</div>
+              <div class="steps__num">{step}</div>
               <div>
                 <div class="steps__title">{title}</div>
                 <div class="steps__desc">{desc}</div>
