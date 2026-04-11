@@ -6,7 +6,7 @@ backend:
   name: github
   repo: tech1982/kyivptscentre
   branch: main
-  base_url: https://sveltia-cms-auth.your-worker.workers.dev  # Replace with your Cloudflare Worker URL after setup
+  base_url: https://kyivptscentre-cms-auth.stanjackdaw.workers.dev
 
 # Media uploaded via the CMS goes here
 media_folder: public/images
