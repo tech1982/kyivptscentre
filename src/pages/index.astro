@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import FeatureList from '../components/FeatureList.astro';
+import { Image } from 'astro:assets';
+import sumetzberger from '../../public/images/Sumetzberger.jpg';
+import roburSafe    from '../../public/images/Robur.jpg';
+import qnet        from '../../public/images/QNet_logo.jpg';
+import aquis       from '../../public/images/Aquis_logo.jpg';
+
+const lang = 'uk';
+
+const stats = [
+  { num: '30+', label: 'реалізованих проєктів' },
+  { num: '5+',  label: 'регіонів України' },
+  { num: '20+', label: 'років досвіду' },
+  { num: '5',   label: 'міжнародних партнерів' },
+];
+
+const solutions = [
+  {
+    href: '/pneumo/',
+    icon: '🔵',
+    accent: '#0a4d68',
+    title: 'Пневматична пошта',
+    desc: 'Блискавична доставка документів, грошей і дрібних вантажів до 1 кг зі швидкістю до 8 м/с. Ідеально для банків, лікарень та торговельних мереж.',
+  },
+  {
+    href: '/queue/',
+    icon: '🟠',
+    accent: '#e8913a',
+    title: 'Керування чергою',
+    desc: 'Електронні системи, що організовують потік клієнтів: від реєстрації та видачі талона до виклику до потрібного вікна.',
+  },
+  {
+    href: '/depository/',
+    icon: '🟢',
+    accent: '#2d8b55',
+    title: 'Депозитарне зберігання',
+    desc: 'Сейфові двері, сховища та депозитні скриньки від шведського виробника Robur Safe. Найвищий клас захисту для ваших цінностей.',
+  },
+];
+
+const partners = [
+  { name: 'Sumetzberger', country: 'Австрія', desc: 'Провідний виробник систем пневматичної пошти в Європі.', url: 'https://www.sumetzberger.at', logo: sumetzberger },
+  { name: 'Robur Safe',   country: 'Швеція',  desc: 'Сейфові двері та депозитарне обладнання класу Grade V.', url: 'https://www.robursafe.com', logo: roburSafe },
+  { name: 'Q-Net Systems',country: 'Угорщина',desc: 'Системи електронного керування чергою для бізнесу будь-якого масштабу.', url: 'https://www.q-net.com', logo: qnet },
+  { name: 'Aquis IT',     country: 'Угорщина',desc: 'Інформаційні кіоски та рішення для обслуговування клієнтів.', url: 'https://www.kioskhungary.eu', logo: aquis },
+];
+
+const howItWorks = [
+  { step: '1', title: 'Станція відправлення', desc: 'Касир або оператор кладе документи чи гроші у спеціальну капсулу і вставляє її в станцію.' },
+  { step: '2', title: 'Вибір адресата',       desc: 'На дисплеї обирається потрібна станція призначення — наприклад, «Бухгалтерія» або «Керівник».' },
+  { step: '3', title: 'Транспортування',      desc: 'Повітряний насос переміщує капсулу трубою зі швидкістю до 8 м/с. Весь шлях займає секунди.' },
+  { step: '4', title: 'Отримання',            desc: 'Капсула автоматично потрапляє на станцію призначення. Отримувач забирає вміст.' },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title="Системи пневматичної пошти та банківське обладнання"
+  description="ТОВ «Київ-PTS-Центр» — постачання та встановлення систем пневматичної пошти, електронного керування чергою та банківського обладнання в Україні."
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__tag">На ринку України з 2005 року</div>
+      <h1 class="hero__title">Інженерні рішення для автоматизації бізнес-процесів</h1>
+      <p class="hero__desc">
+        Проєктуємо, постачаємо й обслуговуємо системи пневматичної пошти,
+        електронні системи керування чергою та депозитарне обладнання
+        для банків і торговельних мереж.
+      </p>
+      <div class="hero__actions">
+        <a href="/contact/" class="btn btn--primary btn--lg">Зв'язатися з нами</a>
+        <a href="/pneumo/"  class="btn btn--outline btn--lg">Наші рішення</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    {stats.map(({ num, label }) => (
+      <div class="stats-bar__item">
+        <span class="stats-bar__num">{num}</span>
+        <span class="stats-bar__label">{label}</span>
+      </div>
+    ))}
+  </div>
+
+  <!-- SOLUTIONS -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        tag="Напрямки"
+        title="Три ключові рішення для вашого бізнесу"
+        subtitle="Комплексні рішення, перевірені провідними європейськими виробниками та адаптовані під потреби українського ринку."
+      />
+      <div class="solutions-grid">
+        {solutions.map(({ href, accent, title, desc }) => (
+          <a href={href} class="solution-card">
+            <div class="solution-card__accent" style={`background:${accent}`}></div>
+            <h3 class="solution-card__title">{title}</h3>
+            <p class="solution-card__desc">{desc}</p>
+            <span class="solution-card__link">Дізнатися більше →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section--gray">
+    <div class="container">
+      <SectionTitle tag="Як це працює" title="Пневмопошта — просто про складне" />
+      <div class="how-box">
+        <p class="how-box__intro">
+          Уявіть: дві точки в одній будівлі — наприклад, каса та кабінет керівника.
+          Вони з'єднані трубою, до якої підключено повітряний насос. Ви кладете гроші
+          чи документи у герметичну <strong>капсулу</strong>, вставляєте в станцію,
+          обираєте адресу — і за лічені секунди капсула прибуває до отримувача.
+        </p>
+        <p class="how-box__intro">
+          Сучасні системи повністю автоматизовані: маршрутизація відбувається
+          програмно, кожне відправлення відстежується на дисплеї в реальному часі.
+          Жодного ручного втручання, жодних затримок.
+        </p>
+      </div>
+      <div class="steps" style="margin-top: 32px">
+        {howItWorks.map(({ step, title, desc }) => (
+          <div class="steps__item">
+            <div class="steps__num">{step}</div>
+            <div>
+              <div class="steps__title">{title}</div>
+              <div class="steps__desc">{desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle tag="Партнери" title="Працюємо з провідними світовими брендами" />
+      <div class="partners-grid">
+        {partners.map(({ name, country, desc, url, logo }) => (
+          <div class="partner-card">
+            <Image src={logo} alt={name} class="partner-card__logo" height={40} loading="lazy" />
+            <div class="partner-card__name">{name}</div>
+            <div class="partner-card__country">{country}</div>
+            <p class="partner-card__desc">{desc}</p>
+            <a class="partner-card__link" href={url} target="_blank" rel="noopener noreferrer">
+              Сайт партнера ↗
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="cta-banner__title">Потрібна консультація?</h2>
+      <p class="cta-banner__sub">Ми підберемо оптимальне рішення для вашого об'єкта</p>
+      <a href="/contact/" class="btn btn--primary btn--lg">Контакти та розташування</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.solution-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  text-decoration: none;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+
+  &:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+  &__accent {
+    width: 48px;
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  &__title { font-size: 1.1rem; font-weight: 700; color: var(--color-text); margin-bottom: 10px; }
+  &__desc  { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.7; flex: 1; }
+  &__link  { font-size: 0.85rem; font-weight: 600; color: var(--color-brand); margin-top: 20px; }
+}
+
+.how-box {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+
+  &__intro {
+    font-size: 0.97rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+    &:last-child { margin-bottom: 0; }
+    strong { color: var(--color-text); }
+  }
+}
+</style>

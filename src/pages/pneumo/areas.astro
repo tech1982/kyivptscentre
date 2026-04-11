@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ItemGrid from '../../components/ItemGrid.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const lang = 'uk';
+
+const subpages = [
+  { href: '/pneumo/',             label: 'Огляд' },
+  { href: '/pneumo/areas/',       label: 'Сфери застосування' },
+  { href: '/pneumo/systems/',     label: 'Типи систем' },
+  { href: '/pneumo/stations/',    label: 'Типи станцій' },
+  { href: '/pneumo/equipment/',   label: 'Обладнання' },
+  { href: '/pneumo/accessories/', label: 'Аксесуари' },
+  { href: '/pneumo/capsules/',    label: 'Капсули' },
+  { href: '/pneumo/software/',    label: 'ПЗ керування' },
+];
+
+const areas = [
+  { t: 'Банки та фінанси', d: 'Пересилка грошей між касами та сховищами, передача документів на підпис, відправка ключів від скриньок. Наш клієнт — Metro Cash & Carry.' },
+  { t: 'Торговельні мережі', d: 'Інкасація виручки з кас без участі людини, обмін документами з бухгалтерією. Знижує ризики та пришвидшує процеси.' },
+  { t: 'Медичні заклади', d: 'Доставка аналізів у лабораторію, пересилка рецептів і медикаментів між відділеннями без ризику пошкодження.' },
+  { t: 'Промислові підприємства', d: 'Швидкий обмін технічною документацією, зразками продукції та запчастинами між цехами й офісом.' },
+];
+---
+
+<BaseLayout lang={lang} title="Пневмопошта — сфери застосування" description="Де використовується пневматична пошта: банки, торгові мережі, лікарні, виробництво.">
+  <div class="container">
+    <div class="page-layout">
+      <aside>
+        <nav class="sidebar-nav">
+          <div class="sidebar-nav__label">Пневматична пошта</div>
+          <ul class="sidebar-nav__list">
+            {subpages.map(({ href, label }) => (
+              <li><a href={href} class:list={['sidebar-nav__link', { active: Astro.url.pathname === href }]}>{label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+      <article>
+        <Breadcrumb items={[{ label: 'Пневматична пошта', href: '/pneumo/' }, { label: 'Сфери застосування' }]} />
+        <SectionTitle tag="Пневматична пошта" title="Сфери застосування" />
+        <p class="intro">Пневмопошта використовується скрізь, де потрібна швидка та безпечна пересилка фізичних предметів між підрозділами без участі людини.</p>
+        <ItemGrid items={areas} />
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.intro { font-size: 0.97rem; color: var(--color-text-muted); line-height: 1.8; margin-bottom: 8px; }
+</style>

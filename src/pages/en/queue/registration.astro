@@ -1,0 +1,27 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+const nav = [
+  { href: '/en/queue/',              label: 'Overview' },
+  { href: '/en/queue/areas/',        label: 'Applications' },
+  { href: '/en/queue/systems/',      label: 'System types' },
+  { href: '/en/queue/registration/', label: 'Client registration' },
+  { href: '/en/queue/displays/',     label: 'Information displays' },
+  { href: '/en/queue/call/',         label: 'Call buttons' },
+  { href: '/en/queue/accessories/',  label: 'Accessories' },
+  { href: '/en/queue/software/',     label: 'Control software' },
+];
+const items = [
+  'Touch-screen interface with a clear service menu — the client selects the category they need',
+  'Ticket printing with queue number and estimated waiting time',
+  'Online pre-booking option with confirmation',
+  'VIP client identification by QR code or loyalty card',
+  'Accessible interface for people with disabilities',
+];
+---
+<ProductLayout lang="en" title="Client Registration in QMS" description="Self-service registration terminals and ticket dispensers for queue management systems." sidebarLabel="Queue Management" navItems={nav} breadcrumbs={[{ label: 'Queue Management', href: '/en/queue/' }, { label: 'Client registration' }]} currentPath="/en/queue/registration/">
+  <SectionTitle tag="Queue Management" title="Client Registration" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">The first point of contact between the client and the system. The terminal must be intuitive for any user.</p>
+  <FeatureList items={items} />
+</ProductLayout>

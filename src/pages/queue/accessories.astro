@@ -1,0 +1,27 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import FeatureList from '../../components/FeatureList.astro';
+const nav = [
+  { href: '/queue/',              label: 'Огляд' },
+  { href: '/queue/areas/',        label: 'Сфери застосування' },
+  { href: '/queue/systems/',      label: 'Типи систем' },
+  { href: '/queue/registration/', label: 'Реєстрація клієнтів' },
+  { href: '/queue/displays/',     label: 'Інформаційні табло' },
+  { href: '/queue/call/',         label: 'Кнопковий виклик' },
+  { href: '/queue/accessories/',  label: 'Аксесуари' },
+  { href: '/queue/software/',     label: 'ПЗ керування' },
+];
+const items = [
+  'Кронштейни та монтажні стійки для терміналів реєстрації',
+  'Термопринтери для друку талонів',
+  'Звукові сигналізатори для підтвердження виклику',
+  'Стійки зі стрічками для організації та розділення потоків клієнтів',
+  'Рекламні панелі та інформаційні стенди для зони очікування',
+];
+---
+<ProductLayout lang="uk" title="Аксесуари для QMS" description="Додаткове обладнання для систем електронного керування чергою." sidebarLabel="Керування чергою" navItems={nav} breadcrumbs={[{ label: 'Керування чергою', href: '/queue/' }, { label: 'Аксесуари' }]} currentPath="/queue/accessories/">
+  <SectionTitle tag="Керування чергою" title="Аксесуари" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Додаткове обладнання для комплектації та розширення систем керування чергою.</p>
+  <FeatureList items={items} />
+</ProductLayout>

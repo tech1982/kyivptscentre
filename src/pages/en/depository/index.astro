@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'en';
+
+const offerings = [
+  'Grade V vault doors — the highest level of certified protection',
+  'Turnkey strongrooms — design, manufacture and installation',
+  'Safe deposit boxes in a range of sizes for banks and private clients',
+  'Access control systems — biometrics, electronic locks, CCTV',
+  'Professional installation and post-warranty maintenance',
+];
+---
+
+<BaseLayout lang={lang} title="Depository Equipment — Robur Safe" description="Supply and installation of Robur Safe (Sweden) depository equipment: vault doors, strongrooms, safe deposit boxes.">
+  <div class="container">
+    <div class="page-layout">
+      <aside>
+        <nav class="sidebar-nav">
+          <div class="sidebar-nav__label">Depository</div>
+          <ul class="sidebar-nav__list">
+            <li><a href="/en/depository/" class="sidebar-nav__link active">Overview</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <article>
+        <Breadcrumb homeLabel="Home" homeHref="/en/" items={[{ label: 'Depository Storage' }]} />
+        <SectionTitle
+          tag="Depository"
+          title="Professional Secure Storage Equipment"
+          subtitle="Vault doors, strongrooms and safe deposit boxes by Robur Safe (Sweden)."
+        />
+        <p class="prose-p">
+          Kyiv-PTS-Centre supplies and installs top-grade depository equipment from
+          Swedish manufacturer Robur Safe. We handle the full cycle: consultation,
+          design, installation and ongoing technical support.
+        </p>
+        <h3 class="subsection-title">What we offer</h3>
+        <FeatureList items={offerings} />
+        <div style="margin-top:32px;">
+          <a href="https://www.robursafe.com" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
+            Manufacturer: Robur Safe (Sweden) ↗
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.prose-p { font-size: 0.97rem; line-height: 1.8; color: var(--color-text-muted); margin-bottom: 16px; }
+.subsection-title { font-size: 1.1rem; color: var(--color-text); margin: 32px 0 16px; }
+</style>

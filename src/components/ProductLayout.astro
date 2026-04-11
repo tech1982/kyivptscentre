@@ -1,0 +1,49 @@
+---
+/**
+ * Reusable layout for product/service sub-pages with sidebar navigation.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from './Breadcrumb.astro';
+
+interface NavItem { href: string; label: string; }
+interface Crumb   { label: string; href?: string; }
+
+interface Props {
+  lang: 'uk' | 'en';
+  title: string;
+  description: string;
+  sidebarLabel: string;
+  navItems: NavItem[];
+  breadcrumbs: Crumb[];
+  currentPath: string;
+}
+
+const { lang, title, description, sidebarLabel, navItems, breadcrumbs, currentPath } = Astro.props;
+const homeHref  = lang === 'en' ? '/en/' : '/';
+const homeLabel = lang === 'en' ? 'Home' : 'Головна';
+---
+
+<BaseLayout {lang} {title} {description}>
+  <div class="container">
+    <div class="page-layout">
+      <aside>
+        <nav class="sidebar-nav" aria-label={sidebarLabel}>
+          <div class="sidebar-nav__label">{sidebarLabel}</div>
+          <ul class="sidebar-nav__list">
+            {navItems.map(({ href, label }) => (
+              <li>
+                <a href={href} class:list={['sidebar-nav__link', { active: currentPath === href }]}>
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+      <article>
+        <Breadcrumb {homeHref} {homeLabel} items={breadcrumbs} />
+        <slot />
+      </article>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+
+const lang = 'en';
+
+const stats = [
+  { num: '30+', label: 'projects delivered' },
+  { num: '5+',  label: 'regions of Ukraine' },
+  { num: '20+', label: 'years of experience' },
+  { num: '5',   label: 'international partners' },
+];
+
+const solutions = [
+  { href: '/en/pneumo/', accent: '#0a4d68', title: 'Pneumatic Tube Mail',  desc: 'Fast delivery of documents, cash, lab samples and small items up to 1 kg at up to 8 m/s. Ideal for banks, hospitals and retail chains.' },
+  { href: '/en/queue/', accent: '#e8913a', title: 'Queue Management', desc: 'Electronic systems organising customer flow: from ticket registration to counter call — no waiting-room stress.' },
+  { href: '/en/depository/', accent: '#2d8b55', title: 'Depository Storage', desc: 'Vault doors, strongrooms and safe deposit boxes by Robur Safe (Sweden). Grade V protection for your valuables.' },
+];
+
+const partners = [
+  { name: 'Sumetzberger', country: 'Austria',  desc: 'Europe\'s leading manufacturer of pneumatic tube systems.', url: 'https://www.sumetzberger.at' },
+  { name: 'Robur Safe',   country: 'Sweden',   desc: 'Grade V vault doors and safe deposit equipment.', url: 'https://www.robursafe.com' },
+  { name: 'Q-Net Systems',country: 'Hungary',  desc: 'Queue management systems for any business scale.', url: 'https://www.q-net.com' },
+  { name: 'Aquis IT',     country: 'Hungary',  desc: 'Self-service kiosks and customer journey solutions.', url: 'https://www.kioskhungary.eu' },
+];
+---
+
+<BaseLayout lang={lang} title="Pneumatic Tube Systems & Banking Equipment" description="Kyiv-PTS-Centre — supply and installation of pneumatic tube systems, queue management and banking equipment in Ukraine.">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__tag">Serving the Ukrainian market since 2005</div>
+      <h1 class="hero__title">Engineering solutions for business process automation</h1>
+      <p class="hero__desc">
+        We design, supply and maintain pneumatic tube systems, electronic queue management
+        systems and depository equipment for banks and retail chains.
+      </p>
+      <div class="hero__actions">
+        <a href="/en/contact/" class="btn btn--primary btn--lg">Contact us</a>
+        <a href="/en/pneumo/" class="btn btn--outline btn--lg">Our solutions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    {stats.map(({ num, label }) => (
+      <div class="stats-bar__item">
+        <span class="stats-bar__num">{num}</span>
+        <span class="stats-bar__label">{label}</span>
+      </div>
+    ))}
+  </div>
+
+  <!-- SOLUTIONS -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle tag="Solutions" title="Three key solutions for your business" subtitle="Comprehensive solutions backed by leading European manufacturers, adapted for the Ukrainian market." />
+      <div class="solutions-grid">
+        {solutions.map(({ href, accent, title, desc }) => (
+          <a href={href} class="solution-card">
+            <div class="solution-card__accent" style={`background:${accent}`}></div>
+            <h3 class="solution-card__title">{title}</h3>
+            <p class="solution-card__desc">{desc}</p>
+            <span class="solution-card__link">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section section--gray">
+    <div class="container">
+      <SectionTitle tag="Partners" title="Working with world-leading brands" />
+      <div class="partners-grid">
+        {partners.map(({ name, country, desc, url }) => (
+          <div class="partner-card">
+            <div class="partner-card__name">{name}</div>
+            <div class="partner-card__country">{country}</div>
+            <p class="partner-card__desc">{desc}</p>
+            <a class="partner-card__link" href={url} target="_blank" rel="noopener noreferrer">Partner website ↗</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="cta-banner__title">Need a consultation?</h2>
+      <p class="cta-banner__sub">We'll find the best solution for your facility</p>
+      <a href="/en/contact/" class="btn btn--primary btn--lg">Contact & Location</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+.solution-card {
+  display: flex; flex-direction: column;
+  background: var(--color-card); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: 32px; text-decoration: none;
+  transition: box-shadow 0.2s, transform 0.2s;
+  &:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  &__accent { width: 48px; height: 4px; border-radius: 2px; margin-bottom: 20px; }
+  &__title  { font-size: 1.1rem; font-weight: 700; color: var(--color-text); margin-bottom: 10px; }
+  &__desc   { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.7; flex: 1; }
+  &__link   { font-size: 0.85rem; font-weight: 600; color: var(--color-brand); margin-top: 20px; }
+}
+</style>

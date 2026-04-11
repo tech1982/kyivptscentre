@@ -1,0 +1,13 @@
+---
+interface Item { t: string; d: string; }
+interface Props { items: Item[]; }
+const { items } = Astro.props;
+---
+<div class="item-grid">
+  {items.map(({ t, d }) => (
+    <div class="item-grid__item">
+      <h3 class="item-grid__title">{t}</h3>
+      <p class="item-grid__desc">{d}</p>
+    </div>
+  ))}
+</div>

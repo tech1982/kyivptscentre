@@ -1,0 +1,74 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<form class="form" id="contactForm" novalidate>
+  <div class="form__row">
+    <div class="form__group">
+      <label class="form__label" for="name">{t['form.name']} *</label>
+      <input class="form__input" type="text" id="name" name="name"
+             placeholder={t['form.namePlaceholder']} required autocomplete="name" />
+    </div>
+    <div class="form__group">
+      <label class="form__label" for="email">{t['form.email']} *</label>
+      <input class="form__input" type="email" id="email" name="email"
+             placeholder={t['form.emailPlaceholder']} required autocomplete="email" />
+    </div>
+  </div>
+
+  <div class="form__group">
+    <label class="form__label" for="phone">{t['form.phone']}</label>
+    <input class="form__input" type="tel" id="phone" name="phone"
+           placeholder={t['form.phonePlaceholder']} autocomplete="tel" />
+  </div>
+
+  <div class="form__group">
+    <label class="form__label" for="message">{t['form.message']} *</label>
+    <textarea class="form__input" id="message" name="message"
+              rows="5" placeholder={t['form.messagePlaceholder']} required></textarea>
+  </div>
+
+  <div id="formStatus" aria-live="polite"></div>
+
+  <button type="submit" class="btn btn--brand" id="submitBtn">
+    {t['form.submit']}
+  </button>
+</form>
+
+<script define:vars={{ successMsg: t['form.success'], errorMsg: t['form.error'], sendingMsg: t['form.submitting'] }}>
+  const form    = document.getElementById('contactForm');
+  const status  = document.getElementById('formStatus');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = sendingMsg;
+    status.innerHTML = '';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+
+      if (res.ok) {
+        status.innerHTML = `<div class="form__msg form__msg--success">${successMsg}</div>`;
+        form.reset();
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      status.innerHTML = `<div class="form__msg form__msg--error">${errorMsg}</div>`;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Надіслати / Send';
+    }
+  });
+</script>

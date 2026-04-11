@@ -1,0 +1,27 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+const nav = [
+  { href: '/en/queue/',              label: 'Overview' },
+  { href: '/en/queue/areas/',        label: 'Applications' },
+  { href: '/en/queue/systems/',      label: 'System types' },
+  { href: '/en/queue/registration/', label: 'Client registration' },
+  { href: '/en/queue/displays/',     label: 'Information displays' },
+  { href: '/en/queue/call/',         label: 'Call buttons' },
+  { href: '/en/queue/accessories/',  label: 'Accessories' },
+  { href: '/en/queue/software/',     label: 'Control software' },
+];
+const items = [
+  'Floor stands and mounting brackets for registration terminals',
+  'Thermal printers for ticket printing',
+  'Acoustic buzzers for call confirmation',
+  'Retractable belt barriers for organising and separating client flows',
+  'Advertising panels and information stands for the waiting area',
+];
+---
+<ProductLayout lang="en" title="QMS Accessories" description="Additional equipment for electronic queue management systems." sidebarLabel="Queue Management" navItems={nav} breadcrumbs={[{ label: 'Queue Management', href: '/en/queue/' }, { label: 'Accessories' }]} currentPath="/en/queue/accessories/">
+  <SectionTitle tag="Queue Management" title="Accessories" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Additional equipment for completing and expanding queue management system installations.</p>
+  <FeatureList items={items} />
+</ProductLayout>

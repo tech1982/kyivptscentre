@@ -1,0 +1,172 @@
+---
+import { type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const isEn = lang === 'en';
+const base = isEn ? '/en' : '';
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__grid">
+      <!-- Brand -->
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="7" fill="rgba(255,255,255,.15)"/>
+            <circle cx="16" cy="16" r="8" stroke="white" stroke-width="2" fill="none"/>
+            <circle cx="16" cy="16" r="3" fill="white"/>
+            <line x1="16" y1="4" x2="16" y2="8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="16" y1="24" x2="16" y2="28" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Київ-PTS-Центр</span>
+        </div>
+        <p class="footer__tagline">
+          {isEn
+            ? 'Pneumatic tube systems, queue management and depository equipment. On the market since 2005.'
+            : 'Системи пневматичної пошти, керування чергою та депозитарне обладнання. На ринку з 2005 року.'}
+        </p>
+      </div>
+
+      <!-- Solutions -->
+      <div>
+        <div class="footer__heading">
+          {isEn ? 'Solutions' : 'Рішення'}
+        </div>
+        <ul class="footer__links">
+          <li><a href={`${base}/pneumo/`}>{isEn ? 'Pneumatic Tube Mail' : 'Пневматична пошта'}</a></li>
+          <li><a href={`${base}/queue/`}>{isEn ? 'Queue Management' : 'Керування чергою'}</a></li>
+          <li><a href={`${base}/depository/`}>{isEn ? 'Depository Storage' : 'Депозитарне зберігання'}</a></li>
+        </ul>
+      </div>
+
+      <!-- Info -->
+      <div>
+        <div class="footer__heading">
+          {isEn ? 'Information' : 'Інформація'}
+        </div>
+        <ul class="footer__links">
+          <li><a href={`${base}/news/`}>{isEn ? 'News' : 'Новини'}</a></li>
+          <li><a href={`${base}/faq/`}>FAQ</a></li>
+          <li><a href={`${base}/support/`}>{isEn ? 'Support' : 'Підтримка'}</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <div class="footer__heading">
+          {isEn ? 'Contact' : 'Контакти'}
+        </div>
+        <address class="footer__address">
+          <p>{isEn ? '04119, Kyiv, 15 Dehtyarivska St., office 2' : '04119, Київ, вул. Дегтярівська, 15, офіс 2'}</p>
+          <p><a href="tel:+380445012171">+380 44 501-21-71</a></p>
+          <p><a href="tel:+380445012140">+380 44 501-21-40</a></p>
+          <p><a href="mailto:office@pts-centre.kiev.ua">office@pts-centre.kiev.ua</a></p>
+          <p class="footer__hours">{isEn ? 'Mon–Fri 10:00–18:00' : 'Пн–Пт 10:00–18:00'}</p>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2005–<span id="footer-year"></span> ТОВ «Київ-PTS-Центр». {isEn ? 'All rights reserved.' : 'Усі права захищені.'}</p>
+      <div class="footer__lang">
+        {isEn
+          ? <a href="/">🇺🇦 Українська</a>
+          : <a href="/en/">🇬🇧 English</a>}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const el = document.getElementById('footer-year');
+  if (el) el.textContent = String(new Date().getFullYear());
+</script>
+
+<style lang="scss">
+.footer {
+  background: var(--color-brand-dark);
+  color: rgba(255,255,255,.8);
+  padding: 64px 0 0;
+
+  &__inner {}
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    padding-bottom: 48px;
+
+    @media (max-width: 900px) { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 520px) { grid-template-columns: 1fr; }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  &__tagline {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,.55);
+  }
+
+  &__heading {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,.45);
+    margin-bottom: 14px;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+
+    a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,.65);
+      transition: color 0.2s;
+      &:hover { color: #fff; }
+    }
+  }
+
+  &__address {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,.6);
+
+    a { color: rgba(255,255,255,.7); transition: color 0.2s; &:hover { color: #fff; } }
+  }
+
+  &__hours { color: rgba(255,255,255,.4); font-size: 0.78rem; }
+
+  &__bottom {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,.4);
+
+    a { color: rgba(255,255,255,.55); transition: color 0.2s; &:hover { color: #fff; } }
+  }
+}
+</style>

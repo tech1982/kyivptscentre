@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import FeatureList from '../../components/FeatureList.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const lang = 'uk';
+
+const subpages = [
+  { href: '/queue/',              label: 'Огляд' },
+  { href: '/queue/areas/',        label: 'Сфери застосування' },
+  { href: '/queue/systems/',      label: 'Типи систем' },
+  { href: '/queue/registration/', label: 'Реєстрація клієнтів' },
+  { href: '/queue/displays/',     label: 'Інформаційні табло' },
+  { href: '/queue/call/',         label: 'Кнопковий виклик' },
+  { href: '/queue/accessories/',  label: 'Аксесуари' },
+  { href: '/queue/software/',     label: 'ПЗ керування' },
+];
+
+const steps = [
+  { s: '1', title: 'Реєстрація', desc: 'Клієнт підходить до терміналу, обирає послугу та отримує талон з номером черги та очікуваним часом.' },
+  { s: '2', title: 'Очікування', desc: 'Клієнт чекає в зоні відпочинку. На табло відображаються поточні номери в режимі реального часу.' },
+  { s: '3', title: 'Виклик',     desc: 'Оператор натискає кнопку. На головному табло та дисплеї біля вікна з\'являється номер і вікно обслуговування.' },
+  { s: '4', title: 'Обслуговування', desc: 'Клієнт підходить до вікна. Система автоматично фіксує час обслуговування та статистику.' },
+];
+
+const results = [
+  'Скорочення суб\'єктивного часу очікування та невдоволення клієнтів',
+  'Рівномірний розподіл навантаження між операторами',
+  'Детальна статистика обслуговування для керівника',
+  'Підвищення задоволеності клієнтів та NPS',
+  'Можливість пріоритизації VIP-клієнтів',
+];
+---
+
+<BaseLayout lang={lang} title="Системи електронного керування чергою" description="Постачання та монтаж систем електронного керування чергою в Україні. Партнери: Q-Net, Aquis IT.">
+  <div class="container">
+    <div class="page-layout">
+      <aside>
+        <nav class="sidebar-nav">
+          <div class="sidebar-nav__label">Керування чергою</div>
+          <ul class="sidebar-nav__list">
+            {subpages.map(({ href, label }) => (
+              <li><a href={href} class:list={['sidebar-nav__link', { active: Astro.url.pathname === href }]}>{label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+      <article>
+        <Breadcrumb items={[{ label: 'Керування чергою' }]} />
+        <SectionTitle tag="Керування чергою" title="Системи електронного керування чергою" subtitle="Сучасне рішення для організації потоку відвідувачів." />
+
+        <p class="prose-p">
+          Електронна система керування чергою (QMS) — це комплекс обладнання та програмного
+          забезпечення, що організовує прийом відвідувачів: від реєстрації до завершення
+          обслуговування. Замість живої черги клієнти отримують талон і спокійно чекають виклику.
+        </p>
+
+        <h3 class="subsection-title">Як це працює</h3>
+        <div class="steps">
+          {steps.map(({ s, title, desc }) => (
+            <div class="steps__item">
+              <div class="steps__num">{s}</div>
+              <div>
+                <div class="steps__title">{title}</div>
+                <div class="steps__desc">{desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h3 class="subsection-title">Результати впровадження</h3>
+        <FeatureList items={results} />
+
+        <div style="margin-top:32px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="https://www.q-net.com" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">Q-Net Systems ↗</a>
+          <a href="https://www.kioskhungary.eu" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">Aquis IT Solutions ↗</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.prose-p { font-size: 0.97rem; line-height: 1.8; color: var(--color-text-muted); margin-bottom: 16px; }
+.subsection-title { font-size: 1.1rem; color: var(--color-text); margin: 32px 0 16px; }
+</style>

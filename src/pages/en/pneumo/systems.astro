@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import ItemGrid from '../../../components/ItemGrid.astro';
+const nav = [
+  { href: '/en/pneumo/',             label: 'Overview' },
+  { href: '/en/pneumo/areas/',       label: 'Applications' },
+  { href: '/en/pneumo/systems/',     label: 'System types' },
+  { href: '/en/pneumo/stations/',    label: 'Station types' },
+  { href: '/en/pneumo/equipment/',   label: 'Equipment' },
+  { href: '/en/pneumo/accessories/', label: 'Accessories' },
+  { href: '/en/pneumo/capsules/',    label: 'Capsules' },
+  { href: '/en/pneumo/software/',    label: 'Control software' },
+];
+const items = [
+  { t: 'Point-to-Point (SB1001)', d: 'The simplest configuration with two stations. Ideal for connecting two key points — e.g. a cashier desk and the accounting office.' },
+  { t: 'Linear System', d: 'Multiple stations connected in sequence. Suitable for objects with a linear layout — e.g. a multi-floor shopping centre.' },
+  { t: 'Multi-Address System', d: 'A branched network with automatic routing. Each capsule is delivered precisely to the target address without human intervention.' },
+  { t: 'Combined System', d: 'A mix of 110 mm and 160 mm pipelines for different cargo types at the same facility.' },
+];
+---
+<ProductLayout lang="en" title="Pneumatic Tube System Types" description="Overview of pneumatic tube system configurations: point-to-point, linear, multi-address and combined." sidebarLabel="Pneumatic Tube Mail" navItems={nav} breadcrumbs={[{ label: 'Pneumatic Tube Mail', href: '/en/pneumo/' }, { label: 'System types' }]} currentPath="/en/pneumo/systems/">
+  <SectionTitle tag="Pneumatic Tube Mail" title="System Types" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">We offer several system configurations that differ in complexity and number of stations.</p>
+  <ItemGrid items={items} />
+</ProductLayout>

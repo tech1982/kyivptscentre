@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import ItemGrid from '../../../components/ItemGrid.astro';
+const nav = [
+  { href: '/en/queue/',              label: 'Overview' },
+  { href: '/en/queue/areas/',        label: 'Applications' },
+  { href: '/en/queue/systems/',      label: 'System types' },
+  { href: '/en/queue/registration/', label: 'Client registration' },
+  { href: '/en/queue/displays/',     label: 'Information displays' },
+  { href: '/en/queue/call/',         label: 'Call buttons' },
+  { href: '/en/queue/accessories/',  label: 'Accessories' },
+  { href: '/en/queue/software/',     label: 'Control software' },
+];
+const items = [
+  { t: 'Banks & Financial Institutions', d: 'Organising client reception at branches: service-based routing, VIP priority, counter load analytics.' },
+  { t: 'Government Services', d: 'Administrative service centres, tax offices, registration authorities.' },
+  { t: 'Medical Facilities', d: 'Clinic reception areas, emergency departments, labs — wherever patient flows need to be separated.' },
+  { t: 'Telecoms & Retail', d: 'Mobile phone shops, electronics stores, insurance companies, car dealerships.' },
+];
+---
+<ProductLayout lang="en" title="QMS — Applications" description="Where electronic queue management systems are used: banks, government offices, healthcare, retail." sidebarLabel="Queue Management" navItems={nav} breadcrumbs={[{ label: 'Queue Management', href: '/en/queue/' }, { label: 'Applications' }]} currentPath="/en/queue/areas/">
+  <SectionTitle tag="Queue Management" title="Applications" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Queue management systems are used in any organisation — large or small — that handles a flow of clients or visitors.</p>
+  <ItemGrid items={items} />
+</ProductLayout>

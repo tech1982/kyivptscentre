@@ -1,0 +1,27 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+const nav = [
+  { href: '/en/queue/',              label: 'Overview' },
+  { href: '/en/queue/areas/',        label: 'Applications' },
+  { href: '/en/queue/systems/',      label: 'System types' },
+  { href: '/en/queue/registration/', label: 'Client registration' },
+  { href: '/en/queue/displays/',     label: 'Information displays' },
+  { href: '/en/queue/call/',         label: 'Call buttons' },
+  { href: '/en/queue/accessories/',  label: 'Accessories' },
+  { href: '/en/queue/software/',     label: 'Control software' },
+];
+const items = [
+  'Hardware call panel: Next, Repeat, Pause — simple and reliable interface',
+  'Software interface on the operator\'s PC with extended management features',
+  'Client redirect to another counter without losing their place in the queue',
+  'Waiting client count indicator on the operator\'s screen',
+  'Automatic "Counter closed" mode when the operator is absent',
+];
+---
+<ProductLayout lang="en" title="QMS Call Buttons" description="Call devices for queue management system operators." sidebarLabel="Queue Management" navItems={nav} breadcrumbs={[{ label: 'Queue Management', href: '/en/queue/' }, { label: 'Call buttons' }]} currentPath="/en/queue/call/">
+  <SectionTitle tag="Queue Management" title="Call Buttons" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Call devices at the operator's workstation — a convenient tool for managing client flow.</p>
+  <FeatureList items={items} />
+</ProductLayout>

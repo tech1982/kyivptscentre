@@ -1,0 +1,28 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import FeatureList from '../../components/FeatureList.astro';
+const nav = [
+  { href: '/pneumo/',             label: 'Огляд' },
+  { href: '/pneumo/areas/',       label: 'Сфери застосування' },
+  { href: '/pneumo/systems/',     label: 'Типи систем' },
+  { href: '/pneumo/stations/',    label: 'Типи станцій' },
+  { href: '/pneumo/equipment/',   label: 'Обладнання' },
+  { href: '/pneumo/accessories/', label: 'Аксесуари' },
+  { href: '/pneumo/capsules/',    label: 'Капсули' },
+  { href: '/pneumo/software/',    label: 'ПЗ керування' },
+];
+const items = [
+  'Комбінований екранований кабель для зв\'язку між станціями',
+  'Шафи-стійки для зберігання та організації капсул',
+  'Кронштейни та монтажні комплекти для кріплення станцій',
+  'Спеціальні штативи для медичних пробірок і контейнерів',
+  'Фіксувальні пристрої для надійного закріплення вмісту капсул',
+  'Захисні сумки та вкладиші для крихких або чутливих вантажів',
+];
+---
+<ProductLayout lang="uk" title="Аксесуари для пневмопошти" description="Додаткове обладнання та аксесуари для систем пневматичної пошти." sidebarLabel="Пневматична пошта" navItems={nav} breadcrumbs={[{ label: 'Пневматична пошта', href: '/pneumo/' }, { label: 'Аксесуари' }]} currentPath="/pneumo/accessories/">
+  <SectionTitle tag="Пневматична пошта" title="Аксесуари" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Додаткове обладнання для розширення функціональності та зручності роботи з системою.</p>
+  <FeatureList items={items} />
+</ProductLayout>

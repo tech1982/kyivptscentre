@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const lang = 'uk';
+
+const faqs = [
+  { q: 'Яка максимальна дальність системи пневмопошти?', a: 'Модель SU-6 забезпечує транспортування на відстань до 380 м. Для довших маршрутів (до 600 м) використовуються проміжні повітродувки.' },
+  { q: 'Чи можна розширити вже встановлену систему?', a: 'Так. Для цього потрібно перерахувати пропускну здатність системи та додати нові станції і трубопроводи. Наші інженери допоможуть із плануванням.' },
+  { q: 'Який тиск використовується в системі?', a: 'Від 0,5 до 1 бар — цього достатньо для переміщення капсул вагою до 1 кг зі швидкістю до 8 м/с.' },
+  { q: 'Що робити, якщо капсула застрягла в трубі?', a: 'Система автоматично змінює напрямок повітряного потоку, щоб звільнити капсулу. Також передбачені ревізійні люки для ручного доступу в критичних точках.' },
+  { q: 'Скільки коштує мінімальна система?', a: 'Базова система «точка-точка» (дві станції) — від 2 800 EUR. Кінцева вартість залежить від кількості станцій, довжини труб та особливостей об\'єкта.' },
+  { q: 'Чи можна прокласти трубу між різними будівлями?', a: 'Так — у підземних переходах, кабельних каналах або по естакадах. Ми маємо досвід таких проєктів.' },
+  { q: 'Який рівень шуму від роботи системи?', a: 'Повітродувку встановлюють у технічному приміщенні. На робочих місцях рівень шуму не перевищує 45 дБ — приблизно як тихий офіс.' },
+  { q: 'Чи можна поєднувати обладнання різних виробників?', a: 'Технічно можливо, якщо воно сумісне за стандартами. Однак для надійної гарантії та сервісу ми рекомендуємо однорідну систему від одного виробника.' },
+];
+---
+
+<BaseLayout lang={lang} title="FAQ — Часті запитання" description="Відповіді на найпоширеніші запитання про системи пневматичної пошти, черги та депозитарне обладнання.">
+  <div class="container" style="padding-top: 48px; padding-bottom: 64px;">
+    <Breadcrumb items={[{ label: 'FAQ' }]} />
+    <SectionTitle tag="FAQ" title="Часті запитання" subtitle="Відповіді на найпоширеніші запитання. Якщо вашого питання немає — зв'яжіться з нами." />
+    <div class="faq" id="faqList">
+      {faqs.map(({ q, a }, i) => (
+        <div class="faq__item" id={`faq-${i}`}>
+          <button class="faq__question" aria-expanded="false" aria-controls={`faq-ans-${i}`}>
+            {q}
+            <svg class="faq__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="faq__answer" id={`faq-ans-${i}`} hidden>{a}</div>
+        </div>
+      ))}
+    </div>
+    <p style="margin-top: 32px; font-size: 0.9rem; color: var(--color-text-muted);">
+      Не знайшли відповідь? <a href="/contact/" style="color: var(--color-brand); font-weight: 600;">Зв'яжіться з нами</a>
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq__question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item   = btn.closest('.faq__item');
+      const answer = btn.nextElementSibling as HTMLElement;
+      const isOpen = !answer.hidden;
+      answer.hidden = isOpen;
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      item?.classList.toggle('open', !isOpen);
+    });
+  });
+</script>

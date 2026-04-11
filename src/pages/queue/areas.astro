@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ItemGrid from '../../components/ItemGrid.astro';
+const nav = [
+  { href: '/queue/',              label: 'Огляд' },
+  { href: '/queue/areas/',        label: 'Сфери застосування' },
+  { href: '/queue/systems/',      label: 'Типи систем' },
+  { href: '/queue/registration/', label: 'Реєстрація клієнтів' },
+  { href: '/queue/displays/',     label: 'Інформаційні табло' },
+  { href: '/queue/call/',         label: 'Кнопковий виклик' },
+  { href: '/queue/accessories/',  label: 'Аксесуари' },
+  { href: '/queue/software/',     label: 'ПЗ керування' },
+];
+const items = [
+  { t: 'Банки та фінансові установи', d: 'Організація прийому клієнтів у відділеннях: розподіл за послугами, пріоритет VIP-клієнтів, аналітика завантаженості вікон.' },
+  { t: 'Державні установи', d: 'Центри надання адміністративних послуг (ЦНАП), податкові інспекції, реєстраційні служби.' },
+  { t: 'Медичні заклади', d: 'Реєстратури поліклінік, приймальні покої, лабораторії — де важливо розділити потоки пацієнтів.' },
+  { t: 'Телекомунікації та рітейл', d: 'Салони мобільного зв\'язку, магазини електроніки, страхові компанії, автосалони.' },
+];
+---
+<ProductLayout lang="uk" title="QMS — сфери застосування" description="Де застосовуються системи електронного керування чергою: банки, держустанови, медицина, рітейл." sidebarLabel="Керування чергою" navItems={nav} breadcrumbs={[{ label: 'Керування чергою', href: '/queue/' }, { label: 'Сфери застосування' }]} currentPath="/queue/areas/">
+  <SectionTitle tag="Керування чергою" title="Сфери застосування" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Системи керування чергою застосовуються в організаціях будь-якого масштабу, де є потік клієнтів або відвідувачів.</p>
+  <ItemGrid items={items} />
+</ProductLayout>

@@ -1,0 +1,51 @@
+# Sveltia CMS configuration
+# Non-technical editors access this at: https://pts-centre.kiev.ua/admin
+# Login with GitHub account (must be added as collaborator on the repo)
+
+backend:
+  name: github
+  repo: tech1982/kyivptscentre
+  branch: main
+  base_url: https://sveltia-cms-auth.your-worker.workers.dev  # Replace with your Cloudflare Worker URL after setup
+
+# Media uploaded via the CMS goes here
+media_folder: public/images
+public_folder: /images
+
+# Locale for the CMS interface
+locale: uk
+
+collections:
+  # ── SITE SETTINGS ──────────────────────────────────────────
+  - name: settings
+    label: "⚙️ Налаштування сайту"
+    label_singular: "Налаштування"
+    files:
+      - name: site
+        label: "Основні налаштування"
+        file: src/content/settings/site.json
+        fields:
+          - { label: "Назва компанії", name: companyName, widget: string }
+          - { label: "Слоган", name: tagline, widget: string }
+          - { label: "Рік заснування", name: foundedYear, widget: number }
+          - label: "Телефони"
+            name: phones
+            widget: list
+            field: { label: Телефон, name: phone, widget: string }
+          - { label: "Email", name: email, widget: string }
+          - { label: "Адреса", name: address, widget: string }
+          - { label: "Робочі години", name: workingHours, widget: string }
+
+  # ── NEWS ───────────────────────────────────────────────────
+  - name: news
+    label: "📰 Новини"
+    label_singular: "Новина"
+    folder: src/content/news
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - { label: "Заголовок", name: title, widget: string }
+      - { label: "Дата", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Короткий опис", name: summary, widget: text }
+      - { label: "Чернетка (не публікувати)", name: draft, widget: boolean, default: false }
+      - { label: "Текст новини", name: body, widget: markdown }

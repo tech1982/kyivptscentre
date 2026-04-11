@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import FeatureList from '../../components/FeatureList.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const lang = 'uk';
+
+const offerings = [
+  'Сейфові двері класу Grade V — найвищий рівень захисту',
+  'Сховища «під ключ» — проєктування, виготовлення, монтаж',
+  'Депозитні скриньки різних розмірів для банків і приватних осіб',
+  'Системи контролю доступу — біометрія, електронні замки, відеоспостереження',
+  'Професійний монтаж та постгарантійне обслуговування',
+];
+---
+
+<BaseLayout lang={lang} title="Депозитарне обладнання — Robur Safe" description="Постачання та встановлення депозитарного обладнання Robur Safe (Швеція): сейфові двері, сховища, депозитні скриньки.">
+  <div class="container">
+    <div class="page-layout">
+      <aside>
+        <nav class="sidebar-nav">
+          <div class="sidebar-nav__label">Депозитарій</div>
+          <ul class="sidebar-nav__list">
+            <li><a href="/depository/" class="sidebar-nav__link active">Огляд</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <article>
+        <Breadcrumb items={[{ label: 'Депозитарне зберігання' }]} />
+        <SectionTitle
+          tag="Депозитарій"
+          title="Професійне обладнання для зберігання цінностей"
+          subtitle="Сейфові двері, сховища та депозитні скриньки від Robur Safe (Швеція)."
+        />
+        <p class="prose-p">
+          Компанія «Київ-PTS-Центр» постачає та встановлює депозитарне обладнання
+          найвищого класу захисту від шведського виробника Robur Safe.
+          Ми пропонуємо повний цикл: від консультації та проєктування до монтажу
+          та технічного обслуговування.
+        </p>
+        <h3 class="subsection-title">Що ми пропонуємо</h3>
+        <FeatureList items={offerings} />
+        <div style="margin-top:32px;">
+          <a href="https://www.robursafe.com" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
+            Виробник: Robur Safe (Швеція) ↗
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.prose-p { font-size: 0.97rem; line-height: 1.8; color: var(--color-text-muted); margin-bottom: 16px; }
+.subsection-title { font-size: 1.1rem; color: var(--color-text); margin: 32px 0 16px; }
+</style>

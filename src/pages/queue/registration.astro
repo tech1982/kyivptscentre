@@ -1,0 +1,27 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import FeatureList from '../../components/FeatureList.astro';
+const nav = [
+  { href: '/queue/',              label: 'Огляд' },
+  { href: '/queue/areas/',        label: 'Сфери застосування' },
+  { href: '/queue/systems/',      label: 'Типи систем' },
+  { href: '/queue/registration/', label: 'Реєстрація клієнтів' },
+  { href: '/queue/displays/',     label: 'Інформаційні табло' },
+  { href: '/queue/call/',         label: 'Кнопковий виклик' },
+  { href: '/queue/accessories/',  label: 'Аксесуари' },
+  { href: '/queue/software/',     label: 'ПЗ керування' },
+];
+const items = [
+  'Сенсорний екран з наочним меню послуг — клієнт обирає потрібну категорію',
+  'Друк талона з номером та орієнтовним часом очікування',
+  'Можливість попереднього запису онлайн із підтвердженням',
+  'Ідентифікація VIP-клієнтів за QR-кодом або карткою лояльності',
+  'Адаптивний інтерфейс для людей з обмеженими можливостями',
+];
+---
+<ProductLayout lang="uk" title="Реєстрація клієнтів у QMS" description="Термінали реєстрації та видачі талонів для систем керування чергою." sidebarLabel="Керування чергою" navItems={nav} breadcrumbs={[{ label: 'Керування чергою', href: '/queue/' }, { label: 'Реєстрація клієнтів' }]} currentPath="/queue/registration/">
+  <SectionTitle tag="Керування чергою" title="Реєстрація клієнтів" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Перша точка взаємодії клієнта з системою. Термінал повинен бути зручним і зрозумілим для будь-якого користувача.</p>
+  <FeatureList items={items} />
+</ProductLayout>

@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import ItemGrid from '../../../components/ItemGrid.astro';
+const nav = [
+  { href: '/en/queue/',              label: 'Overview' },
+  { href: '/en/queue/areas/',        label: 'Applications' },
+  { href: '/en/queue/systems/',      label: 'System types' },
+  { href: '/en/queue/registration/', label: 'Client registration' },
+  { href: '/en/queue/displays/',     label: 'Information displays' },
+  { href: '/en/queue/call/',         label: 'Call buttons' },
+  { href: '/en/queue/accessories/',  label: 'Accessories' },
+  { href: '/en/queue/software/',     label: 'Control software' },
+];
+const items = [
+  { t: 'Main Overhead Display', d: 'Shows multiple current calls simultaneously. Installed in the waiting area in a prominent position.' },
+  { t: 'Counter Display', d: 'Compact screen showing the ticket number currently being served at this counter.' },
+  { t: 'LED Scrolling Banner', d: 'Additional client notification channel, also usable for advertising or informational messages.' },
+];
+---
+<ProductLayout lang="en" title="QMS Information Displays" description="Displays and boards for electronic queue management systems." sidebarLabel="Queue Management" navItems={nav} breadcrumbs={[{ label: 'Queue Management', href: '/en/queue/' }, { label: 'Information displays' }]} currentPath="/en/queue/displays/">
+  <SectionTitle tag="Queue Management" title="Information Displays" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Visual and audio client notification is a key part of a smooth service experience.</p>
+  <img src="/images/DC55_WaitingAreaDisplay.gif" alt="Waiting area information display" style="max-width:300px;border-radius:12px;margin:16px 0" loading="lazy" />
+  <ItemGrid items={items} />
+</ProductLayout>

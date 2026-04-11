@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ItemGrid from '../../components/ItemGrid.astro';
+const nav = [
+  { href: '/pneumo/',             label: 'Огляд' },
+  { href: '/pneumo/areas/',       label: 'Сфери застосування' },
+  { href: '/pneumo/systems/',     label: 'Типи систем' },
+  { href: '/pneumo/stations/',    label: 'Типи станцій' },
+  { href: '/pneumo/equipment/',   label: 'Обладнання' },
+  { href: '/pneumo/accessories/', label: 'Аксесуари' },
+  { href: '/pneumo/capsules/',    label: 'Капсули' },
+  { href: '/pneumo/software/',    label: 'ПЗ керування' },
+];
+const items = [
+  { t: 'Точка-Точка (SB1001)', d: 'Найпростіша конфігурація з двома станціями. Ідеальна для зв\'язку двох ключових точок — наприклад, каси і бухгалтерії.' },
+  { t: 'Лінійна система', d: 'Кілька станцій, з\'єднаних послідовно. Підходить для об\'єктів із лінійним плануванням — наприклад, поверхового торговельного центру.' },
+  { t: 'Багатоадресна система', d: 'Розгалужена мережа з автоматичною маршрутизацією. Кожна капсула доставляється точно за адресою без участі людини.' },
+  { t: 'Комбінована система', d: 'Поєднання трубопроводів діаметром 110 мм і 160 мм для різних типів вантажів на одному об\'єкті.' },
+];
+---
+<ProductLayout lang="uk" title="Типи систем пневмопошти" description="Огляд типів систем пневматичної пошти: від простої точка-точка до розгалужених мереж." sidebarLabel="Пневматична пошта" navItems={nav} breadcrumbs={[{ label: 'Пневматична пошта', href: '/pneumo/' }, { label: 'Типи систем' }]} currentPath="/pneumo/systems/">
+  <SectionTitle tag="Пневматична пошта" title="Типи систем" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Ми пропонуємо кілька типів систем пневмопошти, що відрізняються за складністю та кількістю станцій.</p>
+  <ItemGrid items={items} />
+</ProductLayout>

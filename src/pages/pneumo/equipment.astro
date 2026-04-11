@@ -1,0 +1,28 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import FeatureList from '../../components/FeatureList.astro';
+const nav = [
+  { href: '/pneumo/',             label: 'Огляд' },
+  { href: '/pneumo/areas/',       label: 'Сфери застосування' },
+  { href: '/pneumo/systems/',     label: 'Типи систем' },
+  { href: '/pneumo/stations/',    label: 'Типи станцій' },
+  { href: '/pneumo/equipment/',   label: 'Обладнання' },
+  { href: '/pneumo/accessories/', label: 'Аксесуари' },
+  { href: '/pneumo/capsules/',    label: 'Капсули' },
+  { href: '/pneumo/software/',    label: 'ПЗ керування' },
+];
+const items = [
+  'Повітродувки (компресори) — створюють та підтримують повітряний потік',
+  'Трубопроводи діаметром 110 або 160 мм з нержавіючої сталі або пластику',
+  'Перемикачі напрямку — автоматично маршрутизують капсули',
+  'Контролери керування — координують роботу всіх компонентів системи',
+  'Діагностичні модулі — відстежують стан системи та сигналізують про несправності',
+];
+---
+<ProductLayout lang="uk" title="Обладнання систем пневмопошти" description="Компоненти систем пневматичної пошти: повітродувки, трубопроводи, перемикачі, контролери." sidebarLabel="Пневматична пошта" navItems={nav} breadcrumbs={[{ label: 'Пневматична пошта', href: '/pneumo/' }, { label: 'Обладнання' }]} currentPath="/pneumo/equipment/">
+  <SectionTitle tag="Пневматична пошта" title="Загальне обладнання" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Крім станцій, система включає обов'язкові інфраструктурні компоненти, які забезпечують надійну роботу.</p>
+  <img src="/images/SSCHS_System.gif" alt="Схема системи пневматичної пошти" style="width:100%;border-radius:12px;margin:16px 0" loading="lazy" />
+  <FeatureList items={items} />
+</ProductLayout>

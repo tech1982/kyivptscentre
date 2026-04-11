@@ -1,0 +1,26 @@
+---
+import ProductLayout from '../../components/ProductLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ItemGrid from '../../components/ItemGrid.astro';
+const nav = [
+  { href: '/queue/',              label: 'Огляд' },
+  { href: '/queue/areas/',        label: 'Сфери застосування' },
+  { href: '/queue/systems/',      label: 'Типи систем' },
+  { href: '/queue/registration/', label: 'Реєстрація клієнтів' },
+  { href: '/queue/displays/',     label: 'Інформаційні табло' },
+  { href: '/queue/call/',         label: 'Кнопковий виклик' },
+  { href: '/queue/accessories/',  label: 'Аксесуари' },
+  { href: '/queue/software/',     label: 'ПЗ керування' },
+];
+const items = [
+  { t: 'Базова система (до 5 вікон)', d: 'Простий термінал для видачі талонів, кілька LED-табло, кнопки виклику на робочих місцях. Ідеально для невеликих офісів.' },
+  { t: 'Стандартна система (5–20 вікон)', d: 'Сенсорний кіоск, головне інформаційне табло, індивідуальні дисплеї біля вікон, програмна аналітика.' },
+  { t: 'Розширена система (20+ вікон)', d: 'Мультизональна архітектура, централізоване керування кількома точками обслуговування, інтеграція з CRM/ERP.' },
+];
+---
+<ProductLayout lang="uk" title="Типи систем керування чергою" description="Конфігурації QMS залежно від масштабу: базова, стандартна, розширена." sidebarLabel="Керування чергою" navItems={nav} breadcrumbs={[{ label: 'Керування чергою', href: '/queue/' }, { label: 'Типи систем' }]} currentPath="/queue/systems/">
+  <SectionTitle tag="Керування чергою" title="Типи систем" />
+  <p style="font-size:.97rem;color:var(--color-text-muted);line-height:1.8;margin-bottom:8px">Різні конфігурації залежно від масштабу об'єкта та кількості вікон обслуговування.</p>
+  <img src="/images/QNetBasicSystem1.gif" alt="Базова система керування чергою" style="width:100%;border-radius:12px;margin:16px 0" loading="lazy" />
+  <ItemGrid items={items} />
+</ProductLayout>
