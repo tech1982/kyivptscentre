@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const lang = 'uk';
+
+const cities = ['Київ', 'Дніпро', 'Харків', 'Хмельницький', 'Чернігів', 'Біла Церква'];
+---
+
+<BaseLayout lang={lang} title="Контакти" description="Контакти ТОВ «Київ-PTS-Центр»: адреса, телефон, email. Залиште запит — ми зв'яжемося з вами.">
+  <div class="container" style="padding-top: 48px; padding-bottom: 64px;">
+    <Breadcrumb items={[{ label: 'Контакти' }]} />
+    <SectionTitle tag="Контакти" title="Зв'яжіться з нами" />
+
+    <div class="contact-grid">
+      <!-- Info block -->
+      <div>
+        <div class="contact-info">
+          <h3 style="font-size:1rem; font-weight:600; margin-bottom:20px; color:var(--color-text);">
+            ТОВ «Київ-ПІТІЕС-Центр»
+          </h3>
+
+          <div class="contact-info__row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+            </svg>
+            <div>
+              <div>04119, Київ, вул. Дегтярівська, 15, офіс 2</div>
+            </div>
+          </div>
+
+          <div class="contact-info__row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
+            </svg>
+            <div>
+              <a href="tel:+380445012171">+380 44 501-21-71</a><br/>
+              <a href="tel:+380445012140">+380 44 501-21-40</a>
+            </div>
+          </div>
+
+          <div class="contact-info__row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+            </svg>
+            <a href="mailto:office@pts-centre.kiev.ua">office@pts-centre.kiev.ua</a>
+          </div>
+
+          <div class="contact-info__row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="currentColor"/>
+            </svg>
+            <div>Пн–Пт 10:00–18:00</div>
+          </div>
+        </div>
+
+        <div class="demo-note">
+          З питань демонстрації обладнання просимо попередньо зателефонувати.
+        </div>
+
+        <!-- Geography -->
+        <div class="geo-card">
+          <h3 class="geo-card__title">Географія проєктів</h3>
+          <p class="geo-card__intro">Понад 30 проєктів у різних регіонах України:</p>
+          <img src="/images/MapOf_Ukraine.gif" alt="Карта проєктів в Україні" style="width:100%; border-radius:8px; margin-bottom:12px;" loading="lazy" />
+          <div class="cities-grid">
+            {cities.map(city => (
+              <div class="cities-grid__item">{city}</div>
+            ))}
+          </div>
+          <p class="geo-card__note">Серед клієнтів — Metro Cash & Carry, банки та медичні центри.</p>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div>
+        <h3 style="font-size:1rem; font-weight:600; margin-bottom:20px; color:var(--color-text);">
+          Надіслати запит
+        </h3>
+        <ContactForm lang={lang} />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.demo-note {
+  margin-top: 16px;
+  background: rgba(10,77,104,.06);
+  border: 1px solid rgba(10,77,104,.12);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.geo-card {
+  margin-top: 24px;
+  background: var(--color-bg-gray);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: 24px;
+
+  &__title { font-size: 1rem; font-weight: 600; color: var(--color-text); margin-bottom: 8px; }
+  &__intro  { font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 16px; }
+  &__note   { font-size: 0.82rem; color: var(--color-text-light); margin-top: 16px; }
+}
+</style>

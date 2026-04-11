@@ -1,0 +1,18 @@
+---
+interface Props {
+  tag?: string;
+  title: string;
+  subtitle?: string;
+  center?: boolean;
+}
+const { tag, title, subtitle, center = false } = Astro.props;
+---
+<div class:list={['section__header', { 'section__header--center': center }]}>
+  {tag && <span class="section__eyebrow">{tag}</span>}
+  <h2 class="section__title">{title}</h2>
+  {subtitle && <p class="section__subtitle">{subtitle}</p>}
+</div>
+
+<style lang="scss">
+.section__header--center { text-align: center; .section__subtitle { margin: 0 auto; } }
+</style>

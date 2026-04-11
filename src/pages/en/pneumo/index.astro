@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'en';
+
+const subpages = [
+  { href: '/en/pneumo/',             label: 'Overview' },
+  { href: '/en/pneumo/areas/',       label: 'Applications' },
+  { href: '/en/pneumo/systems/',     label: 'System types' },
+  { href: '/en/pneumo/stations/',    label: 'Station types' },
+  { href: '/en/pneumo/equipment/',   label: 'Equipment' },
+  { href: '/en/pneumo/accessories/', label: 'Accessories' },
+  { href: '/en/pneumo/capsules/',    label: 'Capsules' },
+  { href: '/en/pneumo/software/',    label: 'Control software' },
+];
+
+const advantages = [
+  'Instant delivery of documents, cash and small items up to 1 kg',
+  'Speed up to 8 m/s — faster than any courier',
+  'Fully automated routing — zero manual intervention',
+  'Real-time shipment tracking on LCD displays',
+  'Software control with integration into corporate systems',
+  'Minimal maintenance — designed for years of reliable operation',
+  'High security — password-protected stations and data encryption',
+  'Suitable for new builds and renovation of existing premises',
+];
+---
+
+<BaseLayout lang={lang} title="Pneumatic Tube Systems — Sumetzberger" description="Supply and installation of pneumatic tube systems in Ukraine. Manufacturer: Sumetzberger (Austria). Speed up to 8 m/s, range up to 600 m.">
+  <div class="container">
+    <div class="page-layout">
+      <aside>
+        <nav class="sidebar-nav">
+          <div class="sidebar-nav__label">Pneumatic Tube Mail</div>
+          <ul class="sidebar-nav__list">
+            {subpages.map(({ href, label }) => (
+              <li><a href={href} class:list={['sidebar-nav__link', { active: Astro.url.pathname === href }]}>{label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+      <article>
+        <Breadcrumb homeLabel="Home" homeHref="/en/" items={[{ label: 'Pneumatic Tube Mail' }]} />
+        <SectionTitle tag="Pneumatic Tube Mail" title="Pneumatic Tube Transport Systems" subtitle="Reliable, fast delivery of documents and small items within buildings — by Sumetzberger (Austria)." />
+        <div class="prose">
+          <p>A pneumatic tube system is an engineering solution for the automatic delivery of documents, cash, lab samples, keys and other items weighing up to 1 kg. Capsules travel through pipelines at up to 8 m/s over distances of up to 600 metres.</p>
+          <p><strong>Applications:</strong> banks and financial institutions, supermarkets and retail chains, hospitals and laboratories, industrial enterprises, multi-floor office buildings.</p>
+        </div>
+        <h3 class="subsection-title">Key benefits</h3>
+        <FeatureList items={advantages} />
+        <div class="partner-note">
+          <a href="https://www.sumetzberger.at" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">Manufacturer: Sumetzberger GmbH (Austria) ↗</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.prose { p { font-size: 0.97rem; line-height: 1.8; color: var(--color-text-muted); margin-bottom: 16px; strong { color: var(--color-text); } } }
+.subsection-title { font-size: 1.1rem; color: var(--color-text); margin: 32px 0 16px; }
+.partner-note { margin-top: 32px; }
+</style>

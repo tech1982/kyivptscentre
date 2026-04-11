@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const lang = 'uk';
+---
+
+<BaseLayout lang={lang} title="Технічна підтримка" description="Технічна документація, драйвери та FTP-доступ для клієнтів Київ-PTS-Центр.">
+  <div class="container" style="padding-top: 48px; padding-bottom: 64px;">
+    <Breadcrumb items={[{ label: 'Підтримка' }]} />
+    <SectionTitle tag="Підтримка" title="Технічна документація та завантаження" subtitle="Драйвери, документація та FTP-доступ для наших клієнтів." />
+
+    <div class="support-box">
+      <p class="support-box__text">
+        Для доступу до технічної документації та програмного забезпечення
+        рекомендуємо використовувати сучасний браузер (Chrome, Firefox або Edge).
+      </p>
+      <div class="support-box__links">
+        <a href="ftp://pts-centre.kiev.ua/" class="btn btn--ghost">FTP-сервер ↗</a>
+        <a href="https://pts-centre.kiev.ua/" class="btn btn--ghost">Захищений доступ (HTTPS) ↗</a>
+      </div>
+    </div>
+
+    <div class="support-help">
+      <strong class="support-help__title">Потрібна допомога?</strong>
+      <p class="support-help__text">
+        Зв'яжіться з нами за телефоном
+        <a href="tel:+380445012171"><strong>+380 44 501-21-71</strong></a>
+        або напишіть на
+        <a href="mailto:office@pts-centre.kiev.ua">office@pts-centre.kiev.ua</a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.support-box {
+  background: var(--color-bg-gray);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  margin-bottom: 24px;
+
+  &__text { font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.75; margin-bottom: 20px; }
+  &__links { display: flex; gap: 12px; flex-wrap: wrap; }
+}
+
+.support-help {
+  background: rgba(232,145,58,.08);
+  border: 1px solid rgba(232,145,58,.25);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+
+  &__title { color: var(--color-accent); font-size: 0.95rem; }
+  &__text { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.7; margin-top: 6px;
+    a { color: var(--color-brand); &:hover { text-decoration: underline; } }
+  }
+}
+</style>

@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'en';
+
+const newsItems = [
+  {
+    date: 'May 2007',
+    title: 'Article: "How to improve control with electronic queue management"',
+    desc: 'Published in Business magazine issue #1, 2007. Covers our experience implementing QMS systems in the Ukrainian banking sector.',
+    link: { url: 'http://pts-centre.kiev.ua/source/QControlPromotionPage.pdf', label: 'Download PDF' },
+  },
+  {
+    date: 'December 2006',
+    title: 'Article in Corporate Systems magazine, issue #6',
+    desc: 'A detailed review of our experience deploying a pneumatic tube system for the Metro Cash & Carry retail chain in Ukraine.',
+    link: { url: 'http://pts-centre.kiev.ua/source/CorporateSystems_6_2006.pdf', label: 'Download PDF' },
+  },
+  {
+    date: 'October 2006',
+    title: 'Exhibition: "Corporate & Banking Systems 2006"',
+    desc: 'Kyiv-PTS-Centre participated in the 11th International Specialised Exhibition of Banking and Corporate Equipment.',
+    link: null,
+  },
+  {
+    date: 'January 2007',
+    title: 'Guestbook launched',
+    desc: 'A new feedback section has been added to our website so clients and partners can share their experience.',
+    link: null,
+  },
+];
+---
+
+<BaseLayout lang={lang} title="News & Publications" description="Publications and events from Kyiv-PTS-Centre — articles in industry press and trade exhibitions.">
+  <div class="container" style="padding-top: 48px; padding-bottom: 64px;">
+    <Breadcrumb homeLabel="Home" homeHref="/en/" items={[{ label: 'News' }]} />
+    <SectionTitle tag="News" title="Publications & Events" />
+    <div class="news-grid">
+      {newsItems.map(({ date, title, desc, link }) => (
+        <div class="news-card">
+          <div class="news-card__date">{date}</div>
+          <h3 class="news-card__title">{title}</h3>
+          <p class="news-card__desc">{desc}</p>
+          {link && (
+            <a class="news-card__link" href={link.url} target="_blank" rel="noopener noreferrer">
+              {link.label} ↗
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

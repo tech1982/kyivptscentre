@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'en';
+---
+
+<BaseLayout lang={lang} title="Technical Support" description="Technical documentation, drivers and FTP access for Kyiv-PTS-Centre clients.">
+  <div class="container" style="padding-top: 48px; padding-bottom: 64px;">
+    <Breadcrumb homeLabel="Home" homeHref="/en/" items={[{ label: 'Support' }]} />
+    <SectionTitle tag="Support" title="Technical Documentation & Downloads" subtitle="Drivers, documentation and FTP access for our clients." />
+
+    <div class="support-box">
+      <p class="support-box__text">
+        We recommend using a modern browser (Chrome, Firefox or Edge) to access our
+        technical documentation and software.
+      </p>
+      <div class="support-box__links">
+        <a href="ftp://pts-centre.kiev.ua/" class="btn btn--ghost">FTP server ↗</a>
+        <a href="https://pts-centre.kiev.ua/" class="btn btn--ghost">Secure access (HTTPS) ↗</a>
+      </div>
+    </div>
+
+    <div class="support-help">
+      <strong class="support-help__title">Need help?</strong>
+      <p class="support-help__text">
+        Call us on
+        <a href="tel:+380445012171"><strong>+380 44 501-21-71</strong></a>
+        or email
+        <a href="mailto:office@pts-centre.kiev.ua">office@pts-centre.kiev.ua</a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.support-box {
+  background: var(--color-bg-gray); border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md); padding: 28px; margin-bottom: 24px;
+  &__text  { font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.75; margin-bottom: 20px; }
+  &__links { display: flex; gap: 12px; flex-wrap: wrap; }
+}
+.support-help {
+  background: rgba(232,145,58,.08); border: 1px solid rgba(232,145,58,.25);
+  border-radius: var(--radius-md); padding: 20px 24px;
+  &__title { color: var(--color-accent); font-size: 0.95rem; }
+  &__text  { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.7; margin-top: 6px;
+    a { color: var(--color-brand); &:hover { text-decoration: underline; } }
+  }
+}
+</style>

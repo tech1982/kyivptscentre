@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'en';
+
+const subpages = [
+  { href: '/en/queue/',              label: 'Overview' },
+  { href: '/en/queue/areas/',        label: 'Applications' },
+  { href: '/en/queue/systems/',      label: 'System types' },
+  { href: '/en/queue/registration/', label: 'Client registration' },
+  { href: '/en/queue/displays/',     label: 'Information displays' },
+  { href: '/en/queue/call/',         label: 'Call buttons' },
+  { href: '/en/queue/accessories/',  label: 'Accessories' },
+  { href: '/en/queue/software/',     label: 'Control software' },
+];
+
+const steps = [
+  { s: '1', title: 'Registration', desc: 'The client approaches the kiosk, selects a service and receives a ticket showing their queue number and estimated wait time.' },
+  { s: '2', title: 'Waiting',      desc: 'The client waits in the seating area. The main display shows current numbers being served in real time.' },
+  { s: '3', title: 'Call',         desc: 'The operator presses a button. The display shows the ticket number and counter to proceed to.' },
+  { s: '4', title: 'Service',      desc: 'The client goes to the assigned counter. Service time and statistics are recorded automatically.' },
+];
+
+const results = [
+  'Reduced perceived waiting time and client frustration',
+  'Even distribution of workload across operators',
+  'Detailed service statistics for management reporting',
+  'Higher client satisfaction and NPS scores',
+  'Priority routing for VIP clients',
+];
+---
+
+<BaseLayout lang={lang} title="Electronic Queue Management Systems" description="Supply and installation of queue management systems in Ukraine. Partners: Q-Net, Aquis IT.">
+  <div class="container">
+    <div class="page-layout">
+      <aside>
+        <nav class="sidebar-nav">
+          <div class="sidebar-nav__label">Queue Management</div>
+          <ul class="sidebar-nav__list">
+            {subpages.map(({ href, label }) => (
+              <li><a href={href} class:list={['sidebar-nav__link', { active: Astro.url.pathname === href }]}>{label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+      <article>
+        <Breadcrumb homeLabel="Home" homeHref="/en/" items={[{ label: 'Queue Management' }]} />
+        <SectionTitle tag="Queue Management" title="Electronic Queue Management Systems" subtitle="A modern solution for organising visitor flow." />
+        <p class="prose-p">
+          An electronic queue management system (QMS) is a combination of hardware and software
+          that organises the reception of visitors from registration through to completion of service.
+          Instead of a physical queue, clients receive a ticket and wait comfortably to be called.
+        </p>
+        <h3 class="subsection-title">How it works</h3>
+        <div class="steps">
+          {steps.map(({ s, title, desc }) => (
+            <div class="steps__item">
+              <div class="steps__num">{s}</div>
+              <div>
+                <div class="steps__title">{title}</div>
+                <div class="steps__desc">{desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <h3 class="subsection-title">Results after implementation</h3>
+        <FeatureList items={results} />
+        <div style="margin-top:32px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="https://www.q-net.com" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">Q-Net Systems ↗</a>
+          <a href="https://www.kioskhungary.eu" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">Aquis IT Solutions ↗</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.prose-p { font-size: 0.97rem; line-height: 1.8; color: var(--color-text-muted); margin-bottom: 16px; }
+.subsection-title { font-size: 1.1rem; color: var(--color-text); margin: 32px 0 16px; }
+</style>

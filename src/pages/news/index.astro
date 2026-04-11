@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const lang = 'uk';
+
+const newsItems = [
+  {
+    date: 'Травень 2007',
+    title: 'Стаття «Як налагодити контроль за допомогою електронного керування чергою»',
+    desc: 'У журналі «Бізнес» №1 за 2007 рік опублікована наша стаття про впровадження систем QMS у банківському секторі України.',
+    link: { url: 'http://pts-centre.kiev.ua/source/QControlPromotionPage.pdf', label: 'Завантажити PDF' },
+  },
+  {
+    date: 'Грудень 2006',
+    title: 'Стаття в «Корпоративних системах» №6',
+    desc: 'Детальний огляд досвіду впровадження системи пневматичної пошти для мережі Metro Cash & Carry в Україні.',
+    link: { url: 'http://pts-centre.kiev.ua/source/CorporateSystems_6_2006.pdf', label: 'Завантажити PDF' },
+  },
+  {
+    date: 'Жовтень 2006',
+    title: 'Виставка «Corporate & Banking Systems 2006»',
+    desc: 'Компанія «Київ-PTS-Центр» взяла участь у XI міжнародній спеціалізованій виставці банківського та корпоративного обладнання.',
+    link: null,
+  },
+  {
+    date: 'Січень 2007',
+    title: 'Відкрито «Гостьову книгу»',
+    desc: 'Для зручності зворотного зв\'язку з клієнтами та партнерами на сайті відкрито розділ відгуків.',
+    link: null,
+  },
+];
+---
+
+<BaseLayout lang={lang} title="Новини та публікації" description="Публікації та події компанії «Київ-PTS-Центр» — статті у профільних виданнях, виставки.">
+  <div class="container" style="padding-top: 48px; padding-bottom: 64px;">
+    <Breadcrumb items={[{ label: 'Новини' }]} />
+    <SectionTitle tag="Новини" title="Публікації та події" />
+    <div class="news-grid">
+      {newsItems.map(({ date, title, desc, link }) => (
+        <div class="news-card">
+          <div class="news-card__date">{date}</div>
+          <h3 class="news-card__title">{title}</h3>
+          <p class="news-card__desc">{desc}</p>
+          {link && (
+            <a class="news-card__link" href={link.url} target="_blank" rel="noopener noreferrer">
+              {link.label} ↗
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

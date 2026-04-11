@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionTitle from '../../../components/SectionTitle.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'en';
+
+const faqs = [
+  { q: 'What is the maximum range of a pneumatic tube system?', a: 'The SU-6 model supports distances up to 380 m. For longer routes (up to 600 m), intermediate blowers are used.' },
+  { q: 'Can an existing system be expanded?', a: 'Yes. We recalculate the system capacity and add new stations and pipework. Our engineers will help with planning.' },
+  { q: 'What pressure is used in the system?', a: 'Between 0.5 and 1 bar — sufficient to move capsules weighing up to 1 kg at speeds up to 8 m/s.' },
+  { q: 'What happens if a capsule gets stuck?', a: 'The system automatically reverses the airflow to free the capsule. Inspection hatches are also installed at critical points for manual access.' },
+  { q: 'What does a minimum system cost?', a: 'A basic point-to-point system (two stations) starts from €2,800. The final price depends on the number of stations, pipe length and site specifics.' },
+  { q: 'Can the tube run between separate buildings?', a: 'Yes — through underground ducts, cable channels or overhead bridges. We have experience with such projects.' },
+  { q: 'How noisy is the system?', a: 'The blower is installed in a technical room. Noise at workstations does not exceed 45 dB — roughly equivalent to a quiet office.' },
+  { q: 'Can equipment from different manufacturers be combined?', a: 'Technically yes, if they are compatible. However, for reliable warranties and servicing we recommend keeping to a single manufacturer.' },
+];
+---
+
+<BaseLayout lang={lang} title="FAQ — Frequently Asked Questions" description="Answers to the most common questions about pneumatic tube systems, queue management and depository equipment.">
+  <div class="container" style="padding-top: 48px; padding-bottom: 64px;">
+    <Breadcrumb homeLabel="Home" homeHref="/en/" items={[{ label: 'FAQ' }]} />
+    <SectionTitle tag="FAQ" title="Frequently Asked Questions" subtitle="Can't find your answer? Contact us directly." />
+    <div class="faq" id="faqList">
+      {faqs.map(({ q, a }, i) => (
+        <div class="faq__item" id={`faq-${i}`}>
+          <button class="faq__question" aria-expanded="false" aria-controls={`faq-ans-${i}`}>
+            {q}
+            <svg class="faq__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="faq__answer" id={`faq-ans-${i}`} hidden>{a}</div>
+        </div>
+      ))}
+    </div>
+    <p style="margin-top: 32px; font-size: 0.9rem; color: var(--color-text-muted);">
+      Didn't find your answer? <a href="/en/contact/" style="color: var(--color-brand); font-weight: 600;">Contact us</a>
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq__question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item   = btn.closest('.faq__item');
+      const answer = btn.nextElementSibling as HTMLElement;
+      const isOpen = !answer.hidden;
+      answer.hidden = isOpen;
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      item?.classList.toggle('open', !isOpen);
+    });
+  });
+</script>

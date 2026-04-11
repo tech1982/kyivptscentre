@@ -1,0 +1,276 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const t = ui[lang];
+
+const isEn = lang === 'en';
+const base = isEn ? '/en' : '';
+const altPath = isEn
+  ? currentPath.replace(/^\/en/, '') || '/'
+  : `/en${currentPath}`;
+
+const navLinks = [
+  { href: `${base}/pneumo/`,      label: t['nav.products'] },
+  { href: `${base}/queue/`,       label: t['nav.services'] },
+  { href: `${base}/depository/`,  label: isEn ? 'Depository' : 'Депозитарій' },
+  { href: `${base}/news/`,        label: t['nav.news'] },
+  { href: `${base}/contact/`,     label: t['nav.contact'] },
+];
+
+function isActive(href: string) {
+  return currentPath.startsWith(href.replace(/\/$/, ''));
+}
+---
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <!-- Logo -->
+    <a href={isEn ? '/en/' : '/'} class="header__logo" aria-label="Київ-PTS-Центр — Головна">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <rect width="34" height="34" rx="7" fill="#0a4d68"/>
+        <circle cx="17" cy="17" r="9" stroke="white" stroke-width="2.2" fill="none"/>
+        <circle cx="17" cy="17" r="3.5" fill="white"/>
+        <line x1="17" y1="4" x2="17" y2="8" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="17" y1="26" x2="17" y2="30" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <div class="header__logo-text">
+        <span class="header__logo-name">Київ-PTS-Центр</span>
+        <span class="header__logo-sub">
+          {isEn ? 'PNEUMATIC · QUEUE · DEPOSITORY' : 'ПНЕВМОПОШТА · ЧЕРГИ · ДЕПОЗИТАРІЙ'}
+        </span>
+      </div>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav" aria-label={isEn ? 'Main navigation' : 'Головна навігація'}>
+      <ul class="nav__list">
+        {navLinks.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class={`nav__link ${isActive(href) ? 'nav__link--active' : ''}`}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Right controls -->
+    <div class="header__controls">
+      <!-- Language switcher -->
+      <a href={altPath} class="lang-switch" aria-label={isEn ? 'Перейти на українську' : 'Switch to English'}>
+        {isEn ? 'UA' : 'EN'}
+      </a>
+
+      <!-- Contact CTA -->
+      <a href={`${base}/contact/`} class="btn btn--brand btn--sm header__cta">
+        {t['cta.contact']}
+      </a>
+
+      <!-- Burger -->
+      <button class="burger" id="burger" aria-label={t['openMenu']} aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style lang="scss">
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+  height: var(--header-h);
+  transition: box-shadow 0.2s;
+
+  &.scrolled { box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  &__logo-text { display: flex; flex-direction: column; }
+
+  &__logo-name {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-brand);
+    line-height: 1.1;
+  }
+
+  &__logo-sub {
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  &__cta {
+    @media (max-width: 768px) { display: none; }
+  }
+}
+
+.nav {
+  flex: 1;
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+  }
+
+  &__link {
+    display: block;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition), background var(--transition);
+
+    &:hover { color: var(--color-brand); background: var(--color-bg-gray); }
+
+    &--active {
+      color: var(--color-brand);
+      font-weight: 600;
+      background: rgba(10,77,104,.07);
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    inset: var(--header-h) 0 0;
+    background: #fff;
+    padding: 24px 20px;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+    overflow-y: auto;
+    border-top: 1px solid var(--color-border);
+
+    &.open { transform: translateX(0); }
+
+    &__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+    }
+
+    &__link {
+      font-size: 1.05rem;
+      padding: 12px 16px;
+    }
+  }
+}
+
+.lang-switch {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-muted);
+  transition: border-color var(--transition), color var(--transition);
+
+  &:hover { border-color: var(--color-brand); color: var(--color-brand); }
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  cursor: pointer;
+
+  span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  &.open {
+    span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  }
+
+  @media (max-width: 768px) { display: flex; }
+}
+</style>
+
+<script>
+  const header = document.getElementById('header');
+  const burger = document.getElementById('burger');
+  const nav    = document.getElementById('nav');
+
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  burger?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  nav?.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      burger?.classList.remove('open');
+      burger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav?.classList.contains('open')) {
+      nav.classList.remove('open');
+      burger?.classList.remove('open');
+      burger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      burger?.focus();
+    }
+  });
+</script>
