@@ -9,13 +9,16 @@
 
 export default {
   async fetch(request, env) {
-    const { pathname, searchParams, origin } = new URL(request.url);
+    const { pathname, searchParams } = new URL(request.url);
 
     // ── Step 1: redirect browser to GitHub ──────────────────────────────────
     if (pathname === '/auth') {
+      // `public_repo` is the minimum scope for a public repository.
+      // Grants read/write access to public repos only — no access to
+      // private repos or user profile data.
       const params = new URLSearchParams({
         client_id: env.GITHUB_CLIENT_ID,
-        scope: 'repo,user',
+        scope: 'public_repo',
         state: searchParams.get('state') ?? '',
       });
       return Response.redirect(
