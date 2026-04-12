@@ -109,7 +109,7 @@
   }
 
   /* ---- Intersection Observer for fade-in + counters ---- */
-  const observerOptions = { threshold: 0.15 };
+  const observerOptions = { threshold: 0.05 };
   let countersAnimated = false;
 
   const countersSection = document.querySelector('.projects__counters');
@@ -292,7 +292,7 @@
           'Authorization': 'Bearer ' + RESEND_API_KEY
         },
         body: JSON.stringify({
-          from: 'Київ-PTS-Центр <onboarding@resend.dev>',
+          from: 'Київ-PTS-Центр <noreply@pts-centre.kiev.ua>',
           to: [TO_EMAIL],
           reply_to: emailVal,
           subject: 'Запит з сайту: ' + subjectLabel + ' від ' + nameVal,

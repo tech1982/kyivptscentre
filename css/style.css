@@ -780,6 +780,9 @@ h1, h2, h3, h4, h5 {
   margin-top: 4px;
   min-height: 1em;
 }
+/* Ensure [hidden] always wins regardless of display rules */
+[hidden] { display: none !important; }
+
 .form__success {
   display: flex;
   align-items: flex-start;
