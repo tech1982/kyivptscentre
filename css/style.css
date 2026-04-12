@@ -1314,3 +1314,14 @@ h1, h2, h3, h4, h5 {
   color: var(--color-primary);
 }
 .support__card-icon svg { color: var(--color-primary); }
+
+/* cases__more grouped layout */
+.cases__more { flex-direction: column; align-items: flex-start; gap: 12px; }
+.cases__more-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.cases__more-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
