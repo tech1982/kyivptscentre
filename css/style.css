@@ -1286,7 +1286,7 @@ h1, h2, h3, h4, h5 {
 .cases__counters {
   margin-top: 2rem;
   padding: 2rem;
-  background: var(--color-bg-dark);
+  background: linear-gradient(135deg, #0c2d5c 0%, #1a5fa8 50%, #0e3f7a 100%);
   border-radius: var(--radius-md);
 }
 
