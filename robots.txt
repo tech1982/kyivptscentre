@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.pts-centre.kiev.ua/sitemap.xml
+
+# Block common spam paths
+Disallow: /wp-admin/
+Disallow: /wp-login.php
