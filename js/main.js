@@ -242,7 +242,7 @@
 
   /* ---- Resend API ---- */
   var RESEND_KEY = 're_ETQ98pcZ_5AFqScyFWPYYnWiZdmra6TUJ';
-  var MAIL_TO    = 'office@pts-centre.kiev.ua';
+  var MAIL_TO    = 'stanjackdaw@gmail.com';
   var formError  = document.getElementById('formError');
 
   var SUBJECTS = {
