@@ -318,7 +318,8 @@
       })
       .catch(function (err) {
         resetBtn();
-        showFormError('Не вдалося відправити. Перевірте зʼєднання.');
+        var msg = err && err.message ? err.message : String(err);
+        showFormError('Помилка: ' + msg + ' — перевірте консоль браузера (F12 → Console)');
         console.error('Web3Forms fetch error:', err);
       });
     });
