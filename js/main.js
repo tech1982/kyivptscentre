@@ -351,4 +351,16 @@
   window.addEventListener('scroll', updateActiveLink, { passive: true });
   updateActiveLink();
 
+  /* Anti-scraping: assemble email from parts at runtime */
+  (function () {
+    var u = 'office';
+    var d = 'pts-centre' + '.' + 'kiev' + '.' + 'ua';
+    var addr = u + '@' + d;
+    var link = '<a href="mai' + 'lto:' + addr + '" class="contact__item-value">' + addr + '</a>';
+    var el = document.getElementById('contact-email');
+    if (el) el.innerHTML = link;
+    var fl = document.getElementById('footer-email');
+    if (fl) fl.innerHTML = '<a href="mai' + 'lto:' + addr + '" style="color:rgba(255,255,255,.6);text-decoration:none;">' + addr + '</a>';
+  })();
+
 })();
