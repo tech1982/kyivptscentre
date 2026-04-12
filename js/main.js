@@ -306,7 +306,7 @@
           'Authorization': 'Bearer ' + RESEND_API_KEY
         },
         body: JSON.stringify({
-          from: 'Київ-PTS-Центр <noreply@pts-centre.kiev.ua>',
+          from: 'ТОВ «КИЇВ-ПІТІЕС-ЦЕНТР» <noreply@pts-centre.kiev.ua>',
           to: [TO_EMAIL],
           reply_to: emailVal,
           subject: 'Запит з сайту: ' + subjectLabel + ' від ' + nameVal,
