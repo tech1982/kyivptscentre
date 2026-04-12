@@ -108,35 +108,43 @@
     requestAnimationFrame(update);
   }
 
-  /* ---- Intersection Observer for fade-in ---- */
+  /* ---- Intersection Observer for fade-in + counters ---- */
+  const observerOptions = { threshold: 0.15 };
+  let countersAnimated = false;
+
+  const countersSection = document.querySelector('.projects__counters');
+
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      io.unobserve(entry.target);
+
+      /* Fade-in elements */
+      if (entry.target.classList.contains('fade-in')) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+
+      /* Counter elements */
+      if (entry.target === countersSection && !countersAnimated) {
+        countersAnimated = true;
+        countersSection.querySelectorAll('[data-target]').forEach(function (numEl) {
+          const target = parseInt(numEl.getAttribute('data-target'), 10);
+          animateCounter(numEl, target, 1800);
+        });
+        io.unobserve(countersSection);
+      }
     });
-  }, { threshold: 0.05 });
+  }, observerOptions);
 
-  /* ---- Counter animation — scroll-based (reliable cross-browser) ---- */
-  var countersSection = document.querySelector('.projects__counters');
-  var countersAnimated = false;
+  /* Observe fade-in elements */
+  document.querySelectorAll('.fade-in').forEach(function (el) {
+    io.observe(el);
+  });
 
-  function tryAnimateCounters() {
-    if (!countersSection || countersAnimated) return;
-    var rect = countersSection.getBoundingClientRect();
-    /* trigger when top of section is within the viewport */
-    if (rect.top < window.innerHeight - 80) {
-      countersAnimated = true;
-      countersSection.querySelectorAll('[data-target]').forEach(function (numEl) {
-        animateCounter(numEl, parseInt(numEl.getAttribute('data-target'), 10), 1800);
-      });
-      window.removeEventListener('scroll', tryAnimateCounters);
-    }
+  /* Observe counters section */
+  if (countersSection) {
+    io.observe(countersSection);
   }
-
-  window.addEventListener('scroll', tryAnimateCounters, { passive: true });
-  /* also check immediately in case section is already visible on load */
-  tryAnimateCounters();
 
   /* ---- Add fade-in class dynamically to key sections ---- */
   [
@@ -232,33 +240,34 @@
     }
   });
 
-  /* ---- Resend API form submission ---- */
-  var RESEND_API_KEY = 're_ETQ98pcZ_5AFqScyFWPYYnWiZdmra6TUJ';
-  var TO_EMAIL       = 'office@pts-centre.kiev.ua';
-  var formError      = document.getElementById('formError');
-  var formErrorText  = document.getElementById('formErrorText');
+  /* ---- Resend API ---- */
+  var RESEND_KEY = 're_ETQ98pcZ_5AFqScyFWPYYnWiZdmra6TUJ';
+  var MAIL_TO    = 'office@pts-centre.kiev.ua';
+  var formError  = document.getElementById('formError');
 
-  var SUBJECT_LABELS = {
-    pneumo:  'Система пневматичної пошти',
-    queue:   'Система управління чергою',
-    banking: 'Банківське обладнання',
-    archive: 'Мобільні архіви',
-    service: 'Технічне обслуговування',
-    other:   'Інше',
-    '':      'Загальне питання'
+  var SUBJECTS = {
+    pneumo: 'Система пневматичної пошти',
+    queue:  'Система управління чергою',
+    banking:'Банківське обладнання',
+    archive:'Мобільні архіви',
+    service:'Технічне обслуговування',
+    other:  'Інше',
+    '':     'Загальне питання'
   };
 
-  function showFormError(msg) {
-    if (formError)     formError.hidden = false;
-    if (formErrorText) formErrorText.textContent = msg || 'Помилка відправки. Зателефонуйте нам напряму.';
-    if (formSuccess)   formSuccess.hidden = true;
-    if (formError)     formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  function resetBtn() {
+    if (btnText)   btnText.hidden   = false;
+    if (btnSpinner) btnSpinner.hidden = true;
+    if (submitBtn) submitBtn.disabled = false;
   }
 
-  function resetBtn() {
-    if (btnText)    btnText.hidden = false;
-    if (btnSpinner) btnSpinner.hidden = true;
-    if (submitBtn)  submitBtn.disabled = false;
+  function showFormError(msg) {
+    if (formError) {
+      formError.hidden = false;
+      var span = document.getElementById('formErrorText');
+      if (span) span.textContent = msg;
+      formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   }
 
   if (form) {
@@ -266,34 +275,34 @@
       e.preventDefault();
       if (!validateForm()) return;
 
-      /* hide previous status */
       if (formSuccess) formSuccess.hidden = true;
       if (formError)   formError.hidden   = true;
 
-      var nameVal    = (getField('name')    || {}).value || '';
-      var emailVal   = (getField('email')   || {}).value || '';
-      var phoneVal   = (getField('phone')   || {}).value || '';
-      var subjectVal = (getField('subject') || {}).value || '';
-      var msgVal     = (getField('message') || {}).value || '';
-      var subjectLabel = SUBJECT_LABELS[subjectVal] || 'Загальне питання';
+      var nameVal    = getField('name')    ? getField('name').value    : '';
+      var emailVal   = getField('email')   ? getField('email').value   : '';
+      var phoneVal   = getField('phone')   ? getField('phone').value   : '';
+      var subjectVal = getField('subject') ? getField('subject').value : '';
+      var msgVal     = getField('message') ? getField('message').value : '';
+      var subjectLabel = SUBJECTS[subjectVal] || subjectVal || SUBJECTS[''];
 
-      var htmlBody = [
-        '<h2 style="color:#1a5fa8;font-family:sans-serif">Новий запит з сайту Київ-PTS-Центр</h2>',
-        '<table style="border-collapse:collapse;width:100%;max-width:520px;font-family:sans-serif;font-size:15px">',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600;width:140px">Ім'я</td>',
-          '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + nameVal + '</td></tr>',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Email</td>',
-          '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee"><a href="mailto:' + emailVal + '">' + emailVal + '</a></td></tr>',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Телефон</td>',
-          '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + (phoneVal || '—') + '</td></tr>',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Тема</td>',
-          '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + subjectLabel + '</td></tr>',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600;vertical-align:top">Повідомлення</td>',
-          '<td style="padding:8px 12px">' + msgVal.replace(/
-/g, '<br>') + '</td></tr>',
-        '</table>',
-        '<p style="margin-top:24px;color:#5a6a7a;font-size:13px">Надіслано з форми на pts-centre.kiev.ua</p>'
-      ].join('');
+      /* Build HTML body — no apostrophes in JS strings */
+      var td1 = '<td style="padding:8px 12px;background:#f4f7fb;font-weight:600;width:140px">';
+      var td2 = '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee">';
+      var htmlBody =
+        '<h2 style="color:#1a5fa8;font-family:sans-serif">' +
+          'Новий запит з сайту Київ-PTS-Центр' +
+        '</h2>' +
+        '<table style="border-collapse:collapse;width:100%;max-width:520px;font-family:sans-serif;font-size:15px">' +
+          '<tr>' + td1 + 'Ім’я</td>' + td2 + nameVal + '</td></tr>' +
+          '<tr>' + td1 + 'Email</td>' + td2 + '<a href="mailto:' + emailVal + '">' + emailVal + '</a></td></tr>' +
+          '<tr>' + td1 + 'Телефон</td>' + td2 + (phoneVal || '—') + '</td></tr>' +
+          '<tr>' + td1 + 'Тема</td>' + td2 + subjectLabel + '</td></tr>' +
+          '<tr>' + td1 + 'Повідомлення</td>' +
+            td2 + msgVal.split('\n').join('<br>') + '</td></tr>' +
+        '</table>' +
+        '<p style="margin-top:24px;color:#5a6a7a;font-size:13px">' +
+          'Надіслано з pts-centre.kiev.ua' +
+        '</p>';
 
       if (btnText)    btnText.hidden    = true;
       if (btnSpinner) btnSpinner.hidden = false;
@@ -303,11 +312,11 @@
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + RESEND_API_KEY
+          'Authorization': 'Bearer ' + RESEND_KEY
         },
         body: JSON.stringify({
           from: 'ТОВ «КИЇВ-ПІТІЕС-ЦЕНТР» <noreply@pts-centre.kiev.ua>',
-          to: [TO_EMAIL],
+          to: [MAIL_TO],
           reply_to: emailVal,
           subject: 'Запит з сайту: ' + subjectLabel + ' від ' + nameVal,
           html: htmlBody
@@ -316,22 +325,24 @@
       .then(function (res) {
         resetBtn();
         if (res.ok) {
-          formSuccess.hidden = false;
+          if (formSuccess) {
+            formSuccess.hidden = false;
+            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
           form.reset();
-          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
-          res.json().then(function (data) {
-            console.error('Resend API error:', res.status, data);
-            showFormError('Помилка ' + res.status + ': ' + (data.message || res.statusText));
-          }).catch(function() {
-            showFormError('Помилка сервера (' + res.status + '). Зателефонуйте нам напряму.');
+          res.json().then(function (d) {
+            showFormError('Помилка ' + res.status + ': ' + (d.message || res.statusText));
+            console.error('Resend:', res.status, d);
+          }).catch(function () {
+            showFormError('Помилка сервера (' + res.status + ')');
           });
         }
       })
       .catch(function (err) {
         resetBtn();
+        showFormError('Не вдалося відправити. Перевірте зʼєднання.');
         console.error('Resend fetch error:', err);
-        showFormError('Не вдалося відправити повідомлення. Перевірте з'єднання або зателефонуйте нам напряму.');
       });
     });
   }
