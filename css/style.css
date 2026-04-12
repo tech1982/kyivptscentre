@@ -1069,3 +1069,96 @@ h1, h2, h3, h4, h5 {
   color: var(--color-text-muted);
   line-height: 1.7;
 }
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.how-it-works { background: var(--color-bg-gray); }
+
+.how__steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+.how__step {
+  flex: 1;
+  text-align: center;
+  padding: 2rem 1.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.how__step-num {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+.how__step-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+.how__step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.how__step p { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.65; }
+.how__step-arrow {
+  align-self: center;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  padding: 0 0.5rem;
+  flex-shrink: 0;
+  opacity: 0.4;
+}
+@media (max-width: 768px) {
+  .how__steps { flex-direction: column; gap: 8px; }
+  .how__step-arrow { transform: rotate(90deg); align-self: center; }
+}
+
+/* ============================================================
+   SUPPORT CARDS
+   ============================================================ */
+.support__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.support__card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+}
+.support__card--highlight {
+  border-color: var(--color-primary-light);
+  background: linear-gradient(135deg, #e8f0fc 0%, #f4f7fb 100%);
+}
+.support__card-icon { font-size: 1.75rem; margin-bottom: 0.75rem; display: block; }
+.support__card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.support__card > p { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.65; }
+.support__links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 1rem;
+}
+.support__link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.support__link:hover { color: var(--color-primary-dark); text-decoration: underline; }
+.support__cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.support__cities span {
+  background: var(--color-bg-gray);
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  padding: 3px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
