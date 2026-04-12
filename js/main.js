@@ -117,18 +117,26 @@
     });
   }, { threshold: 0.05 });
 
-  /* ---- Dedicated counter observer (completely separate) ---- */
+  /* ---- Counter animation — scroll-based (reliable cross-browser) ---- */
   var countersSection = document.querySelector('.projects__counters');
-  if (countersSection) {
-    var counterObs = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting) return;
-      counterObs.disconnect();
+  var countersAnimated = false;
+
+  function tryAnimateCounters() {
+    if (!countersSection || countersAnimated) return;
+    var rect = countersSection.getBoundingClientRect();
+    /* trigger when top of section is within the viewport */
+    if (rect.top < window.innerHeight - 80) {
+      countersAnimated = true;
       countersSection.querySelectorAll('[data-target]').forEach(function (numEl) {
         animateCounter(numEl, parseInt(numEl.getAttribute('data-target'), 10), 1800);
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    counterObs.observe(countersSection);
+      window.removeEventListener('scroll', tryAnimateCounters);
+    }
   }
+
+  window.addEventListener('scroll', tryAnimateCounters, { passive: true });
+  /* also check immediately in case section is already visible on load */
+  tryAnimateCounters();
 
   /* ---- Add fade-in class dynamically to key sections ---- */
   [
