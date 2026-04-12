@@ -26,15 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Inject secrets into JS
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          FORM_RECIPIENT: ${{ secrets.FORM_RECIPIENT }}
-        run: |
-          sed -i "s|__RESEND_API_KEY__|${RESEND_API_KEY}|g" js/main.js
-          sed -i "s|__FORM_RECIPIENT__|${FORM_RECIPIENT}|g" js/main.js
-          echo "Secrets injected."
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

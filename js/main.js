@@ -240,32 +240,21 @@
     }
   });
 
-  /* ---- Resend API ---- */
-  var RESEND_KEY = '__RESEND_API_KEY__';
-  var MAIL_TO    = '__FORM_RECIPIENT__';
-  var formError  = document.getElementById('formError');
-
-  var SUBJECTS = {
-    pneumo: 'Система пневматичної пошти',
-    queue:  'Система управління чергою',
-    banking:'Банківське обладнання',
-    archive:'Мобільні архіви',
-    service:'Технічне обслуговування',
-    other:  'Інше',
-    '':     'Загальне питання'
-  };
+  /* ---- Web3Forms (CORS-native, key safe to expose) ---- */
+  var W3F_KEY   = '6fe5da8e-7b67-42bd-9664-a5e019ee785d';
+  var formError = document.getElementById('formError');
 
   function resetBtn() {
-    if (btnText)   btnText.hidden   = false;
+    if (btnText)    btnText.hidden    = false;
     if (btnSpinner) btnSpinner.hidden = true;
-    if (submitBtn) submitBtn.disabled = false;
+    if (submitBtn)  submitBtn.disabled = false;
   }
 
   function showFormError(msg) {
     if (formError) {
       formError.hidden = false;
       var span = document.getElementById('formErrorText');
-      if (span) span.textContent = msg;
+      if (span) span.textContent = msg || 'Помилка відправки. Спробуйте ще раз.';
       formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
@@ -283,69 +272,58 @@
       var phoneVal   = getField('phone')   ? getField('phone').value   : '';
       var subjectVal = getField('subject') ? getField('subject').value : '';
       var msgVal     = getField('message') ? getField('message').value : '';
-      var subjectLabel = SUBJECTS[subjectVal] || subjectVal || SUBJECTS[''];
 
-      /* Build HTML body — no apostrophes in JS strings */
-      var td1 = '<td style="padding:8px 12px;background:#f4f7fb;font-weight:600;width:140px">';
-      var td2 = '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee">';
-      var htmlBody =
-        '<h2 style="color:#1a5fa8;font-family:sans-serif">' +
-          'Новий запит з сайту Київ-PTS-Центр' +
-        '</h2>' +
-        '<table style="border-collapse:collapse;width:100%;max-width:520px;font-family:sans-serif;font-size:15px">' +
-          '<tr>' + td1 + 'Ім’я</td>' + td2 + nameVal + '</td></tr>' +
-          '<tr>' + td1 + 'Email</td>' + td2 + '<a href="mailto:' + emailVal + '">' + emailVal + '</a></td></tr>' +
-          '<tr>' + td1 + 'Телефон</td>' + td2 + (phoneVal || '—') + '</td></tr>' +
-          '<tr>' + td1 + 'Тема</td>' + td2 + subjectLabel + '</td></tr>' +
-          '<tr>' + td1 + 'Повідомлення</td>' +
-            td2 + msgVal.split('\n').join('<br>') + '</td></tr>' +
-        '</table>' +
-        '<p style="margin-top:24px;color:#5a6a7a;font-size:13px">' +
-          'Надіслано з pts-centre.kiev.ua' +
-        '</p>';
+      var subjectLabels = {
+        pneumo:  'Система пневматичної пошти',
+        queue:   'Система управління чергою',
+        banking: 'Банківське обладнання',
+        archive: 'Мобільні архіви',
+        service: 'Технічне обслуговування',
+        other:   'Інше'
+      };
+      var subjectLabel = subjectLabels[subjectVal] || 'Загальне питання';
 
       if (btnText)    btnText.hidden    = true;
       if (btnSpinner) btnSpinner.hidden = false;
       if (submitBtn)  submitBtn.disabled = true;
 
-      fetch('https://api.resend.com/emails', {
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + RESEND_KEY
-        },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          from: 'ТОВ «КИЇВ-ПІТІЕС-ЦЕНТР» <noreply@pts-centre.kiev.ua>',
-          to: [MAIL_TO],
-          reply_to: emailVal,
+          access_key: W3F_KEY,
           subject: 'Запит з сайту: ' + subjectLabel + ' від ' + nameVal,
-          html: htmlBody
+          from_name: 'Сайт Київ-PTS-Центр',
+          replyto: emailVal,
+          name: nameVal,
+          email: emailVal,
+          phone: phoneVal || '—',
+          topic: subjectLabel,
+          message: msgVal
         })
       })
-      .then(function (res) {
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
         resetBtn();
-        if (res.ok) {
+        if (data.success) {
           if (formSuccess) {
             formSuccess.hidden = false;
             formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
           form.reset();
         } else {
-          res.json().then(function (d) {
-            showFormError('Помилка ' + res.status + ': ' + (d.message || res.statusText));
-            console.error('Resend:', res.status, d);
-          }).catch(function () {
-            showFormError('Помилка сервера (' + res.status + ')');
-          });
+          showFormError('Помилка: ' + (data.message || 'невідома помилка'));
+          console.error('Web3Forms error:', data);
         }
       })
       .catch(function (err) {
         resetBtn();
         showFormError('Не вдалося відправити. Перевірте зʼєднання.');
-        console.error('Resend fetch error:', err);
+        console.error('Web3Forms fetch error:', err);
       });
     });
   }
+
 
   /* ---- Active nav link on scroll ---- */
   const sections = document.querySelectorAll('section[id]');
