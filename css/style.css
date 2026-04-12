@@ -625,14 +625,14 @@ h1, h2, h3, h4, h5 {
   font-family: var(--font-heading);
   font-size: 3rem;
   font-weight: 800;
-  color: var(--color-accent);
+  color: #ffffff;
   line-height: 1;
 }
 .projects__counter-plus {
   font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 800;
-  color: var(--color-accent);
+  color: #ffffff;
   vertical-align: top;
   margin-top: 2px;
 }
