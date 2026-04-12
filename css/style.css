@@ -1029,3 +1029,43 @@ h1, h2, h3, h4, h5 {
    SUPPORT SECTION
    ============================================================ */
 .support { background: var(--color-bg); }
+
+/* ============================================================
+   APPLICATIONS SECTION
+   ============================================================ */
+.applications { background: var(--color-bg-gray); }
+
+.applications__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.application-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+}
+.application-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--color-primary-light);
+}
+.application-card__icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.application-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+.application-card p {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
