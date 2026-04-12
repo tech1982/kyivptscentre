@@ -1252,3 +1252,30 @@ h1, h2, h3, h4, h5 {
   transition: color var(--transition);
 }
 .cases__more-link:hover { color: var(--color-primary-dark); text-decoration: underline; }
+
+/* ============================================================
+   CREDENTIALS BLOCK (About section)
+   ============================================================ */
+.credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+.credential {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #e8f0fc 0%, #f4f7fb 100%);
+  border: 1px solid #bdd2ef;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+.credential__icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+.credential strong { color: var(--color-text); font-weight: 700; }
+.credential span { font-size: 0.82rem; }
