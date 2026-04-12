@@ -241,8 +241,8 @@
   });
 
   /* ---- Resend API ---- */
-  var RESEND_KEY = 're_ETQ98pcZ_5AFqScyFWPYYnWiZdmra6TUJ';
-  var MAIL_TO    = 'stanjackdaw@gmail.com';
+  var RESEND_KEY = '__RESEND_API_KEY__';
+  var MAIL_TO    = '__FORM_RECIPIENT__';
   var formError  = document.getElementById('formError');
 
   var SUBJECTS = {
