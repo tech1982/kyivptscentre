@@ -1279,3 +1279,38 @@ h1, h2, h3, h4, h5 {
 .credential__icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
 .credential strong { color: var(--color-text); font-weight: 700; }
 .credential span { font-size: 0.82rem; }
+
+/* ============================================================
+   CASES COUNTERS (merged into projects section)
+   ============================================================ */
+.cases__counters {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  background: var(--color-bg-dark);
+  border-radius: var(--radius-md);
+}
+.cases__counter {
+  text-align: center;
+  color: #fff;
+  min-width: 100px;
+}
+.cases__counter .projects__counter-num { font-size: 2.4rem; }
+.cases__counter .projects__counter-plus { font-size: 1.8rem; }
+.cases__counter .projects__counter-label {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,.6);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Fix: SVG icons in application/how/support cards */
+.application-card__icon svg,
+.how__step-icon svg {
+  color: var(--color-primary);
+}
+.support__card-icon svg { color: var(--color-primary); }
