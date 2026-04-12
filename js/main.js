@@ -113,8 +113,7 @@
   let countersAnimated = false;
 
   /* counters moved to .cases__counters after section merge */
-  var countersSection = document.querySelector('.cases__counters') ||
-                        document.querySelector('.projects__counters');
+  var countersSection = document.querySelector('.cases__counters');
 
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
