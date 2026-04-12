@@ -240,25 +240,87 @@
     }
   });
 
+  /* ---- Resend API form submission ---- */
+  var RESEND_API_KEY = 're_ETQ98pcZ_5AFqScyFWPYYnWiZdmra6TUJ';
+  var TO_EMAIL       = 'office@pts-centre.kiev.ua';
+
+  var SUBJECT_LABELS = {
+    pneumo:   'Система пневматичної пошти',
+    queue:    'Система управління чергою',
+    banking:  'Банківське обладнання',
+    archive:  'Мобільні архіви',
+    service:  'Технічне обслуговування',
+    other:    'Інше',
+    '':       'Загальне питання'
+  };
+
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       if (!validateForm()) return;
 
-      /* Simulate form submission (no backend in static hosting) */
+      var nameVal    = (getField('name')    || {}).value || '';
+      var emailVal   = (getField('email')   || {}).value || '';
+      var phoneVal   = (getField('phone')   || {}).value || '';
+      var subjectVal = (getField('subject') || {}).value || '';
+      var msgVal     = (getField('message') || {}).value || '';
+
+      var subjectLabel = SUBJECT_LABELS[subjectVal] || subjectVal || 'Загальне питання';
+
+      var htmlBody = [
+        '<h2 style="color:#1a5fa8">Новий запит з сайту Київ-PTS-Центр</h2>',
+        '<table style="border-collapse:collapse;width:100%;max-width:520px;font-family:sans-serif;font-size:15px">',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600;width:140px">Ім'я</td><td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + nameVal + '</td></tr>',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Email</td><td style="padding:8px 12px;border-bottom:1px solid #dde4ee"><a href="mailto:' + emailVal + '">' + emailVal + '</a></td></tr>',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Телефон</td><td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + (phoneVal || '—') + '</td></tr>',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Тема</td><td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + subjectLabel + '</td></tr>',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600;vertical-align:top">Повідомлення</td><td style="padding:8px 12px">' + msgVal.replace(/
+/g, '<br>') + '</td></tr>',
+        '</table>',
+        '<p style="margin-top:24px;color:#5a6a7a;font-size:13px">Надіслано з форми зворотного зв'язку на pts-centre.kiev.ua</p>'
+      ].join('');
+
       if (btnText) btnText.hidden = true;
       if (btnSpinner) btnSpinner.hidden = false;
       submitBtn.disabled = true;
 
-      setTimeout(function () {
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + RESEND_API_KEY
+        },
+        body: JSON.stringify({
+          from: 'Київ-PTS-Центр <onboarding@resend.dev>',
+          to: [TO_EMAIL],
+          reply_to: emailVal,
+          subject: 'Запит з сайту: ' + subjectLabel + ' від ' + nameVal,
+          html: htmlBody
+        })
+      })
+      .then(function (res) {
         if (btnText) btnText.hidden = false;
         if (btnSpinner) btnSpinner.hidden = true;
         submitBtn.disabled = false;
-        formSuccess.hidden = false;
-        form.reset();
-        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 1200);
+
+        if (res.ok) {
+          formSuccess.hidden = false;
+          form.reset();
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          return res.json().then(function (data) {
+            alert('Помилка відправки: ' + (data.message || res.statusText) + '\nСпробуйте зателефонувати нам напряму.');
+          });
+        }
+      })
+      .catch(function (err) {
+        if (btnText) btnText.hidden = false;
+        if (btnSpinner) btnSpinner.hidden = true;
+        submitBtn.disabled = false;
+        alert('Не вдалося відправити повідомлення. Перевірте з'єднання або зателефонуйте нам напряму.');
+        console.error('Resend error:', err);
+      });
     });
   }
 

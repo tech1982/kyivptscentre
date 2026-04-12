@@ -171,9 +171,10 @@
 
       <div class="products__grid">
 
-        <!-- Product 1: Pneumatic Tube -->
-        <article class="product-card">
-          <div class="product-card__icon product-card__icon--blue" aria-hidden="true">
+        <!-- Product 1: Pneumatic Tube – FEATURED -->
+        <article class="product-card product-card--featured">
+          <div class="product-card__badge">Популярне</div>
+          <div class="product-card__icon product-card__icon--white" aria-hidden="true">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M3 12h18M3 12l4-4M3 12l4 4"/>
               <rect x="14" y="8" width="7" height="8" rx="1"/>
@@ -189,16 +190,16 @@
           <ul class="product-card__features">
             <li>Вага вантажу до 1 кг</li>
             <li>Швидкість до 8 м/с</li>
-            <li>Готівка, документи, проби</li>
+            <li>Дальність — до 600 метрів</li>
             <li>Банки, лікарні, підприємства</li>
           </ul>
+          <div class="product-card__partner">🇦🇹 <strong>Sumetzberger GmbH</strong>, Австрія</div>
           <a href="#contact" class="product-card__link">Дізнатися більше →</a>
         </article>
 
         <!-- Product 2: Queue Management -->
-        <article class="product-card product-card--featured">
-          <div class="product-card__badge">Популярне</div>
-          <div class="product-card__icon product-card__icon--white" aria-hidden="true">
+        <article class="product-card">
+          <div class="product-card__icon product-card__icon--blue" aria-hidden="true">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="2" y="3" width="20" height="14" rx="2"/>
               <path d="M8 21h8M12 17v4"/>
@@ -217,6 +218,7 @@
             <li>Програмне забезпечення</li>
             <li>Статистика та аналітика</li>
           </ul>
+          <div class="product-card__partner">🇮🇱 <strong>Q-Net / SPB Technical</strong>, Ізраїль</div>
           <a href="#contact" class="product-card__link">Дізнатися більше →</a>
         </article>
 
@@ -420,14 +422,25 @@
             </div>
             <div>
               <p class="contact__item-label">Адреса</p>
-              <p class="contact__item-value">м. Київ, Україна</p>
+              <p class="contact__item-value">04119, м. Київ<br>вул. Дегтярівська, 15, офіс 2</p>
             </div>
           </div>
 
           <div class="contact__hours">
             <p class="contact__item-label">Графік роботи</p>
-            <p>Понеділок – П'ятниця: 9:00 – 18:00</p>
+            <p>Понеділок – П'ятниця: 10:00 – 18:00</p>
             <p>Субота – Неділя: вихідний</p>
+          </div>
+
+          <div class="contact__map">
+            <p class="contact__item-label">Карта розташування</p>
+            <div class="map-container">
+              <iframe
+                src="https://maps.google.com/maps?q=50.4669,30.4888&hl=uk&z=16&output=embed"
+                width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Розташування офісу Київ-PTS-Центр"></iframe>
+            </div>
           </div>
         </div>
 
@@ -519,7 +532,7 @@
         <p><a href="tel:+380445012171">+380 44 501-21-71</a></p>
         <p><a href="tel:+380445012140">+380 44 501-21-40</a></p>
         <p><a href="mailto:office@pts-centre.kiev.ua">office@pts-centre.kiev.ua</a></p>
-        <p>м. Київ, Україна</p>
+        <p>04119, м. Київ<br>вул. Дегтярівська, 15, офіс 2</p>
       </div>
     </div>
 
