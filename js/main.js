@@ -108,42 +108,26 @@
     requestAnimationFrame(update);
   }
 
-  /* ---- Intersection Observer for fade-in + counters ---- */
-  const observerOptions = { threshold: 0.05 };
-  let countersAnimated = false;
-
-  const countersSection = document.querySelector('.projects__counters');
-
+  /* ---- Intersection Observer for fade-in ---- */
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
-
-      /* Fade-in elements */
-      if (entry.target.classList.contains('fade-in')) {
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
-
-      /* Counter elements */
-      if (entry.target === countersSection && !countersAnimated) {
-        countersAnimated = true;
-        countersSection.querySelectorAll('[data-target]').forEach(function (numEl) {
-          const target = parseInt(numEl.getAttribute('data-target'), 10);
-          animateCounter(numEl, target, 1800);
-        });
-        io.unobserve(countersSection);
-      }
+      entry.target.classList.add('visible');
+      io.unobserve(entry.target);
     });
-  }, observerOptions);
+  }, { threshold: 0.05 });
 
-  /* Observe fade-in elements */
-  document.querySelectorAll('.fade-in').forEach(function (el) {
-    io.observe(el);
-  });
-
-  /* Observe counters section */
+  /* ---- Dedicated counter observer (completely separate) ---- */
+  var countersSection = document.querySelector('.projects__counters');
   if (countersSection) {
-    io.observe(countersSection);
+    var counterObs = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      counterObs.disconnect();
+      countersSection.querySelectorAll('[data-target]').forEach(function (numEl) {
+        animateCounter(numEl, parseInt(numEl.getAttribute('data-target'), 10), 1800);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    counterObs.observe(countersSection);
   }
 
   /* ---- Add fade-in class dynamically to key sections ---- */
@@ -243,47 +227,69 @@
   /* ---- Resend API form submission ---- */
   var RESEND_API_KEY = 're_ETQ98pcZ_5AFqScyFWPYYnWiZdmra6TUJ';
   var TO_EMAIL       = 'office@pts-centre.kiev.ua';
+  var formError      = document.getElementById('formError');
+  var formErrorText  = document.getElementById('formErrorText');
 
   var SUBJECT_LABELS = {
-    pneumo:   'Система пневматичної пошти',
-    queue:    'Система управління чергою',
-    banking:  'Банківське обладнання',
-    archive:  'Мобільні архіви',
-    service:  'Технічне обслуговування',
-    other:    'Інше',
-    '':       'Загальне питання'
+    pneumo:  'Система пневматичної пошти',
+    queue:   'Система управління чергою',
+    banking: 'Банківське обладнання',
+    archive: 'Мобільні архіви',
+    service: 'Технічне обслуговування',
+    other:   'Інше',
+    '':      'Загальне питання'
   };
+
+  function showFormError(msg) {
+    if (formError)     formError.hidden = false;
+    if (formErrorText) formErrorText.textContent = msg || 'Помилка відправки. Зателефонуйте нам напряму.';
+    if (formSuccess)   formSuccess.hidden = true;
+    if (formError)     formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetBtn() {
+    if (btnText)    btnText.hidden = false;
+    if (btnSpinner) btnSpinner.hidden = true;
+    if (submitBtn)  submitBtn.disabled = false;
+  }
 
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-
       if (!validateForm()) return;
+
+      /* hide previous status */
+      if (formSuccess) formSuccess.hidden = true;
+      if (formError)   formError.hidden   = true;
 
       var nameVal    = (getField('name')    || {}).value || '';
       var emailVal   = (getField('email')   || {}).value || '';
       var phoneVal   = (getField('phone')   || {}).value || '';
       var subjectVal = (getField('subject') || {}).value || '';
       var msgVal     = (getField('message') || {}).value || '';
-
-      var subjectLabel = SUBJECT_LABELS[subjectVal] || subjectVal || 'Загальне питання';
+      var subjectLabel = SUBJECT_LABELS[subjectVal] || 'Загальне питання';
 
       var htmlBody = [
-        '<h2 style="color:#1a5fa8">Новий запит з сайту Київ-PTS-Центр</h2>',
+        '<h2 style="color:#1a5fa8;font-family:sans-serif">Новий запит з сайту Київ-PTS-Центр</h2>',
         '<table style="border-collapse:collapse;width:100%;max-width:520px;font-family:sans-serif;font-size:15px">',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600;width:140px">Ім'я</td><td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + nameVal + '</td></tr>',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Email</td><td style="padding:8px 12px;border-bottom:1px solid #dde4ee"><a href="mailto:' + emailVal + '">' + emailVal + '</a></td></tr>',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Телефон</td><td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + (phoneVal || '—') + '</td></tr>',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Тема</td><td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + subjectLabel + '</td></tr>',
-        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600;vertical-align:top">Повідомлення</td><td style="padding:8px 12px">' + msgVal.replace(/
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600;width:140px">Ім'я</td>',
+          '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + nameVal + '</td></tr>',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Email</td>',
+          '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee"><a href="mailto:' + emailVal + '">' + emailVal + '</a></td></tr>',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Телефон</td>',
+          '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + (phoneVal || '—') + '</td></tr>',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600">Тема</td>',
+          '<td style="padding:8px 12px;border-bottom:1px solid #dde4ee">' + subjectLabel + '</td></tr>',
+        '<tr><td style="padding:8px 12px;background:#f4f7fb;font-weight:600;vertical-align:top">Повідомлення</td>',
+          '<td style="padding:8px 12px">' + msgVal.replace(/
 /g, '<br>') + '</td></tr>',
         '</table>',
-        '<p style="margin-top:24px;color:#5a6a7a;font-size:13px">Надіслано з форми зворотного зв'язку на pts-centre.kiev.ua</p>'
+        '<p style="margin-top:24px;color:#5a6a7a;font-size:13px">Надіслано з форми на pts-centre.kiev.ua</p>'
       ].join('');
 
-      if (btnText) btnText.hidden = true;
+      if (btnText)    btnText.hidden    = true;
       if (btnSpinner) btnSpinner.hidden = false;
-      submitBtn.disabled = true;
+      if (submitBtn)  submitBtn.disabled = true;
 
       fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -300,26 +306,24 @@
         })
       })
       .then(function (res) {
-        if (btnText) btnText.hidden = false;
-        if (btnSpinner) btnSpinner.hidden = true;
-        submitBtn.disabled = false;
-
+        resetBtn();
         if (res.ok) {
           formSuccess.hidden = false;
           form.reset();
           formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
-          return res.json().then(function (data) {
-            alert('Помилка відправки: ' + (data.message || res.statusText) + '\nСпробуйте зателефонувати нам напряму.');
+          res.json().then(function (data) {
+            console.error('Resend API error:', res.status, data);
+            showFormError('Помилка ' + res.status + ': ' + (data.message || res.statusText));
+          }).catch(function() {
+            showFormError('Помилка сервера (' + res.status + '). Зателефонуйте нам напряму.');
           });
         }
       })
       .catch(function (err) {
-        if (btnText) btnText.hidden = false;
-        if (btnSpinner) btnSpinner.hidden = true;
-        submitBtn.disabled = false;
-        alert('Не вдалося відправити повідомлення. Перевірте з'єднання або зателефонуйте нам напряму.');
-        console.error('Resend error:', err);
+        resetBtn();
+        console.error('Resend fetch error:', err);
+        showFormError('Не вдалося відправити повідомлення. Перевірте з'єднання або зателефонуйте нам напряму.');
       });
     });
   }

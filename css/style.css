@@ -952,3 +952,20 @@ h1, h2, h3, h4, h5 {
 .map-container iframe {
   display: block;
 }
+
+/* ============================================================
+   FORM GLOBAL ERROR STATE
+   ============================================================ */
+.form__error-global {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  color: #991b1b;
+}
+.form__error-global svg { flex-shrink: 0; color: var(--color-error); margin-top: 1px; }
