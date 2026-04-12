@@ -112,7 +112,9 @@
   const observerOptions = { threshold: 0.15 };
   let countersAnimated = false;
 
-  const countersSection = document.querySelector('.projects__counters');
+  /* counters moved to .cases__counters after section merge */
+  var countersSection = document.querySelector('.cases__counters') ||
+                        document.querySelector('.projects__counters');
 
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -123,16 +125,6 @@
         entry.target.classList.add('visible');
         io.unobserve(entry.target);
       }
-
-      /* Counter elements */
-      if (entry.target === countersSection && !countersAnimated) {
-        countersAnimated = true;
-        countersSection.querySelectorAll('[data-target]').forEach(function (numEl) {
-          const target = parseInt(numEl.getAttribute('data-target'), 10);
-          animateCounter(numEl, target, 1800);
-        });
-        io.unobserve(countersSection);
-      }
     });
   }, observerOptions);
 
@@ -141,9 +133,16 @@
     io.observe(el);
   });
 
-  /* Observe counters section */
+  /* Dedicated counter scroll observer */
   if (countersSection) {
-    io.observe(countersSection);
+    var counterObs = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      counterObs.disconnect();
+      countersSection.querySelectorAll('[data-target]').forEach(function (numEl) {
+        animateCounter(numEl, parseInt(numEl.getAttribute('data-target'), 10), 1800);
+      });
+    }, { threshold: 0.1 });
+    counterObs.observe(countersSection);
   }
 
   /* ---- Add fade-in class dynamically to key sections ---- */
