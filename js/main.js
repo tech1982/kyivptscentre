@@ -351,11 +351,19 @@
   window.addEventListener('scroll', updateActiveLink, { passive: true });
   updateActiveLink();
 
-  /* Anti-scraping: set mailto href on SVG email link at runtime */
+  /* Anti-scraping: assemble emails at runtime only */
   (function () {
-    var u = 'office', d = 'pts-centre.kiev.ua';
+    var u = 'office', d = 'pts' + '-centre.kiev.ua';
+    var addr = u + '@' + d;
+    /* main contact link */
     var el = document.getElementById('contact-email-link');
-    if (el) el.href = 'mai' + 'lto:' + u + '@' + d;
+    if (el) el.href = 'mai' + 'lto:' + addr;
+    /* footer — build SVG text node */
+    var fw = document.getElementById('footer-email-wrap');
+    if (fw) fw.innerHTML =
+      '<svg width="210" height="18" viewBox="0 0 210 18" role="img">' +
+      '<text x="0" y="13" font-family="-apple-system,sans-serif" font-size="13" fill="rgba(255,255,255,.6)">' +
+      addr + '<\/text><\/svg>';
   })();
 
 })();
