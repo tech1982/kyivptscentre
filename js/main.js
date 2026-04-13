@@ -92,18 +92,15 @@
 
   /* ---- Animated counters ---- */
   function animateCounter(el, target, duration) {
+    const suffix = el.getAttribute('data-suffix') || '';
     const start = performance.now();
     function update(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      /* ease-out-quart */
       const eased = 1 - Math.pow(1 - progress, 4);
-      el.textContent = Math.round(eased * target);
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      } else {
-        el.textContent = target;
-      }
+      const val = Math.round(eased * target);
+      el.textContent = progress < 1 ? val : val + suffix;
+      if (progress < 1) requestAnimationFrame(update);
     }
     requestAnimationFrame(update);
   }
@@ -113,7 +110,7 @@
   let countersAnimated = false;
 
   /* counters moved to .cases__counters after section merge */
-  var countersSection = document.querySelector('.cases__counters');
+  var countersSection = document.querySelector('.hero__stats');
 
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
