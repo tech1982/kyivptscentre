@@ -677,12 +677,16 @@ h1, h2, h3, h4, h5 {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   gap: 3rem;
-  align-items: start;
+  align-items: stretch;
 }
 @media (max-width: 860px) {
   .contact__grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 
+.contact__info {
+  display: flex;
+  flex-direction: column;
+}
 .contact__info h3 {
   font-size: 1.3rem;
   margin-bottom: 2rem;
@@ -947,6 +951,9 @@ h1, h2, h3, h4, h5 {
    ============================================================ */
 .contact__map {
   margin-top: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .contact__map .contact__item-label {
   margin-bottom: 0.75rem;
@@ -956,9 +963,15 @@ h1, h2, h3, h4, h5 {
   overflow: hidden;
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .map-container iframe {
   display: block;
+  flex: 1;
+  min-height: 200px;
+  height: 100%;
 }
 
 /* ============================================================
