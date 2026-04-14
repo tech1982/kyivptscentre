@@ -288,7 +288,7 @@
         body: JSON.stringify({
           access_key: W3F_KEY,
           subject: 'Запит з сайту: ' + subjectLabel + ' від ' + nameVal,
-          from_name: 'Сайт Київ-PTS-Центр',
+          from_name: 'Сайт Київ-ПіТіеС-Центр',
           replyto: emailVal,
           name: nameVal,
           email: emailVal,
