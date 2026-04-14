@@ -238,6 +238,11 @@
   /* ---- Web3Forms (CORS-native, key safe to expose) ---- */
   var W3F_KEY   = '6fe5da8e-7b67-42bd-9664-a5e019ee785d';
   var formError = document.getElementById('formError');
+  /* Timestamp set when JS runs (i.e. a real browser rendered the page).
+     Bots that POST straight to Web3Forms can't fake this, and humans need
+     at least a few seconds to fill the form — so sub-3s submits are dropped. */
+  var formLoadedAt = Date.now();
+  var MIN_FILL_MS  = 3000;
 
   function resetBtn() {
     if (btnText)    btnText.hidden    = false;
@@ -258,6 +263,28 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!validateForm()) return;
+
+      /* Honeypot: if the hidden field was filled, it's a bot. Fail silently
+         so scrapers don't learn they've been caught. */
+      var honeypot = getField('website');
+      if (honeypot && honeypot.value) {
+        if (formSuccess) {
+          formSuccess.hidden = false;
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        form.reset();
+        return;
+      }
+
+      /* Timing gate: humans can't complete the form in under 3 seconds. */
+      if (Date.now() - formLoadedAt < MIN_FILL_MS) {
+        if (formSuccess) {
+          formSuccess.hidden = false;
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        form.reset();
+        return;
+      }
 
       if (formSuccess) formSuccess.hidden = true;
       if (formError)   formError.hidden   = true;
@@ -287,6 +314,7 @@
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           access_key: W3F_KEY,
+          botcheck: '',
           subject: 'Запит з сайту: ' + subjectLabel + ' від ' + nameVal,
           from_name: 'Сайт Київ-ПіТіеС-Центр',
           replyto: emailVal,
