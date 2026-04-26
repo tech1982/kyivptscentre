@@ -2,16 +2,27 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://www.pts-centre.kiev.ua/">
-  <link rel="canonical" href="https://www.pts-centre.kiev.ua/">
-  <title>Київ-ПТС-Центр — переадресація</title>
+  <title>Сторінку не знайдено — Київ-ПТС-Центр</title>
   <script>
-    // Redirect non-www to www, preserving path
-    var target = 'https://www.pts-centre.kiev.ua' + window.location.pathname + window.location.search;
-    window.location.replace(target);
+    if (window.location.hostname !== 'www.pts-centre.kiev.ua') {
+      window.location.replace(
+        'https://www.pts-centre.kiev.ua' +
+        window.location.pathname +
+        window.location.search
+      );
+    }
   </script>
 </head>
 <body>
-  <p>Переадресація... <a href="https://www.pts-centre.kiev.ua/">Перейти на сайт</a></p>
+  <style>
+    body{font-family:sans-serif;display:flex;align-items:center;justify-content:center;
+    min-height:100vh;margin:0;background:#f4f7fb;color:#1a3a5c;text-align:center}
+    h1{font-size:4rem;margin:0}p{color:#6b7280}a{color:#1a5fa8}
+  </style>
+  <div>
+    <h1>404</h1>
+    <p>Сторінку не знайдено</p>
+    <a href="https://www.pts-centre.kiev.ua/">← На головну</a>
+  </div>
 </body>
 </html>
